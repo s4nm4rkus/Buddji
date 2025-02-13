@@ -1,20 +1,31 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { useFonts } from "expo-font";
+import AppNavigator from "./navigation/AppNavigator";
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+const App = () => {
+  const [loaded] = useFonts({
+    MBold: require("./assets/fonts/Montserrat-Bold.ttf"), // Rename font file
+    MBlack: require("./assets/fonts/Montserrat-Black.ttf"),
+    MSemiBold: require("./assets/fonts/Montserrat-SemiBold.ttf"),
+    MExtraBold: require("./assets/fonts/Montserrat-ExtraBold.ttf"),
+    MMedium: require("./assets/fonts/Montserrat-Medium.ttf"),
+    MRegular: require("./assets/fonts/Montserrat-Regular.ttf"),
+    MLight: require("./assets/fonts/Montserrat-Light.ttf"),
+    MExtraLight: require("./assets/fonts/Montserrat-ExtraLight.ttf"),
+    InBlack: require("./assets/fonts/Inter_Black.ttf"),
+    InBold: require("./assets/fonts/Inter_Bold.ttf"),
+    InSemiBold: require("./assets/fonts/Inter_SemiBold.ttf"),
+    InMedium: require("./assets/fonts/Inter_Medium.ttf"),
+    InRegular: require("./assets/fonts/Inter_Regular.ttf"),
+    InExtraBold: require("./assets/fonts/Inter_ExtraBold.ttf"),
+    InThin: require("./assets/fonts/Inter_Thin.ttf"),
+    InLight: require("./assets/fonts/Inter_Light.ttf"),
+  });
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+  if (!loaded) {
+    return null; // Show nothing until fonts are loaded
+  }
+
+  return <AppNavigator />;
+};
+
+export default App;

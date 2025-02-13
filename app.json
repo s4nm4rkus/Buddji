@@ -23,6 +23,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "a19038bd-485b-4bdb-a749-098e72c91062"
+      }
+    },
+    "owner": "markusdev"
   }
 }

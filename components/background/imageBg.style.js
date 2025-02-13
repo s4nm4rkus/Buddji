@@ -1,0 +1,30 @@
+import { StyleSheet, Dimensions } from "react-native";
+
+const { width, height } = Dimensions.get("window");
+
+const styles = StyleSheet.create({
+  viewBg: {
+    flex: 1,
+    backgroundColor: "rgba(0, 0, 0, 0)",
+    width: "100%",
+    height: "100%",
+    zIndex: 0,
+  },
+  imageBg: {
+    position: "absolute", // Position the background image at the bottom
+    bottom: -150,
+    right: 0,
+    width: "100%",
+    height: 500,
+    zIndex: -1,
+  },
+  imageBg2: {
+    position: "absolute", // Position the background image at the bottom
+    bottom: 50,
+    left: 0,
+    width: "100%",
+    height: 500,
+    zIndex: -2,
+  },
+});
+export default styles;
