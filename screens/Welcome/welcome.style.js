@@ -8,18 +8,29 @@ const styles = StyleSheet.create({
   },
 
   container: {
-    marginTop: 100,
-    paddingHorizontal: 20,
-    backgroundColor: "rgba(0, 0, 0, 0)",
+    padding: 20,
     height: "100%",
+    width: "100%",
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
     zIndex: 1,
   },
 
+  logoText: {
+    position: "absolute",
+    top: 120,
+    fontFamily: "InBlack",
+    justifyContent: "center",
+    alignItems: "center",
+    fontSize: 50,
+    color: "#0A4B2D",
+    zIndex: 1,
+    elevation: 2,
+  },
+
   welcomeText: {
-    paddingTop: 300,
+    marginTop: 30,
     fontFamily: "InSemiBold",
     justifyContent: "center",
     alignItems: "center",
@@ -39,6 +50,44 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "#fff",
     elevation: 2,
+  },
+
+  welcomeButtonContainer: {
+    position: "absolute",
+    bottom: 60,
+    width: "90%",
+    justifyContent: "center",
+    alignContent: "center",
+  },
+
+  signUpButtonText: {
+    fontSize: 16,
+    fontFamily: "InBold",
+    textAlign: "center",
+    color: "#0A4B2D",
+  },
+
+  signUpButton: {
+    backgroundColor: "#fff",
+    paddingVertical: 6,
+    marginVertical: 5,
+    borderRadius: 5,
+    elevation: 4,
+  },
+
+  loginButtonText: {
+    fontSize: 16,
+    fontFamily: "InBold",
+    textAlign: "center",
+    color: "#fff",
+  },
+
+  loginButton: {
+    borderWidth: 0.8,
+    borderColor: "#fff",
+    paddingVertical: 6,
+    marginVertical: 5,
+    borderRadius: 5,
   },
 });
 

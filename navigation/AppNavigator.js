@@ -2,23 +2,23 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import WelcomeScreen from "../screens/Welcome/welcomeScreen";
-import LoginScreen from "../screens/Auth/Login/LoginScreen";
+import LoginScreen from "../screens/Auth/Login/loginScreen";
 
 const Stack = createStackNavigator();
 
 const AppNavigator = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Welcome">
+      <Stack.Navigator initialRouteName="WelcomeScreen">
         <Stack.Screen
-          name="Welcome"
+          name="WelcomeScreen"
           component={WelcomeScreen}
           options={{
             headerShown: false,
           }}
         />
         <Stack.Screen
-          name="Login"
+          name="LoginScreen"
           component={LoginScreen}
           options={{
             headerShown: false,

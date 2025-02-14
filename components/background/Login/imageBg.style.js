@@ -4,27 +4,28 @@ const { width, height } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
   viewBg: {
+    position: "absolute",
     flex: 1,
     backgroundColor: "rgba(0, 0, 0, 0)",
     width: "100%",
-    height: "100%",
+    height: "150%",
     zIndex: 0,
   },
   imageBg: {
     position: "absolute", // Position the background image at the bottom
-    bottom: -150,
+    top: -100,
     right: 0,
     width: "100%",
     height: 500,
-    zIndex: -1,
+    zIndex: 0,
   },
   imageBg2: {
     position: "absolute", // Position the background image at the bottom
-    bottom: 50,
+    top: 40,
     left: 0,
     width: "100%",
     height: 500,
-    zIndex: -2,
+    zIndex: 0,
   },
 });
 export default styles;

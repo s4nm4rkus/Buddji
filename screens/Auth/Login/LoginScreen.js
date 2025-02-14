@@ -1,20 +1,105 @@
+import { useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  SafeAreaView,
+  ImageBackground,
+  TouchableOpacity,
+  KeyboardAvoidingView,
+  Platform,
+  TextInput,
+  ScrollView,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from "react-native";
+import { Feather } from "@expo/vector-icons";
+import ImageBg from "../../../components/background/Login/imageBg";
+import styles from "./login.style";
 
-export default function LoginScreen() {
+const LoginScreen = ({ navigation }) => {
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  const [password, setPassword] = useState("");
+  const togglePasswordVisibility = () => {
+    setPasswordVisible(!passwordVisible);
+  };
   return (
-    <View style={styles.container}>
-      <Text>Login Page</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+    <SafeAreaView style={styles.safeContainer}>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+          keyboardVerticalOffset={Platform.OS === "ios" ? 100 : -50} // Adjust as needed
+          style={styles.container}
+        >
+          <Text style={[styles.logoText, { zIndex: 1 }]}>LOGO</Text>
+          <View style={styles.container}>
+            <View style={styles.loginContainer}>
+              <Text style={[styles.loginText, { zIndex: 1 }]}>Login</Text>
+            </View>
+            <View style={styles.textInputsContainer}>
+              <View style={styles.emailInputContainer}>
+                <Text style={styles.textLabel}>Email</Text>
+                <View style={styles.inputContainer}>
+                  <View style={styles.inputWrapper}>
+                    <TextInput
+                      placeholder="Enter your email"
+                      style={styles.inInput}
+                      onChangeText={(text) => setEmailOrMobile(text)}
+                    />
+                  </View>
+                </View>
+              </View>
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
+              <View style={styles.passwordInputContainer}>
+                <Text style={styles.textLabel}>Password</Text>
+                <View style={styles.inputContainer}>
+                  <View style={styles.inputWrapper}>
+                    <TextInput
+                      placeholder="Enter your password"
+                      style={styles.inInput}
+                      secureTextEntry={!passwordVisible}
+                      value={password}
+                      onChangeText={(text) => setPassword(text)}
+                    />
+                    <TouchableOpacity
+                      style={styles.eyeButtonContainer}
+                      onPress={togglePasswordVisibility}
+                    >
+                      {/* <Feather
+                        name={passwordVisible ? "eye" : "eye-off"}
+                        size={24}
+                        color={"#000"}
+                      /> */}
+                    </TouchableOpacity>
+                  </View>
+                </View>
+                <TouchableOpacity>
+                  <Text style={styles.forgotYourPasswordText}>
+                    Forgot your password?
+                  </Text>
+                </TouchableOpacity>
+                {/* <Text style={styles.forgotYourPasswordText}>
+                  Forgot your password?
+                </Text> */}
+              </View>
+            </View>
+            <StatusBar style="auto" />
+          </View>
+
+          <View style={styles.loginButtonContainer}>
+            <TouchableOpacity
+              style={[styles.loginButton, { zIndex: 2 }]}
+              onPress={() => navigation.navigate("LoginScreen")}
+            >
+              <Text style={styles.loginButtonText}>Login</Text>
+            </TouchableOpacity>
+          </View>
+          <ImageBg style={{ zIndex: -1 }} />
+        </KeyboardAvoidingView>
+      </TouchableWithoutFeedback>
+    </SafeAreaView>
+  );
+};
+
+export default LoginScreen;
