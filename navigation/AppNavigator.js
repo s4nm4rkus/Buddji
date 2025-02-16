@@ -3,6 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import WelcomeScreen from "../screens/Welcome/welcomeScreen";
 import LoginScreen from "../screens/Auth/Login/loginScreen";
+import SignUpScreen from "../screens/Auth/SignUp/signUpScreen";
 
 const Stack = createStackNavigator();
 
@@ -20,6 +21,13 @@ const AppNavigator = () => {
         <Stack.Screen
           name="LoginScreen"
           component={LoginScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="SignUpScreen"
+          component={SignUpScreen}
           options={{
             headerShown: false,
           }}

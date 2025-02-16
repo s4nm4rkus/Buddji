@@ -14,6 +14,15 @@ const styles = StyleSheet.create({
     zIndex: 1,
   },
 
+  scrollViewContaner: {
+    width: "100%",
+  },
+
+  logoContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
   container: {
     height: "100%",
     width: "100%",
@@ -24,7 +33,7 @@ const styles = StyleSheet.create({
   },
 
   logoText: {
-    marginTop: 150,
+    marginTop: 100,
     fontFamily: "InBlack",
     justifyContent: "center",
     alignItems: "center",
@@ -139,8 +148,9 @@ const styles = StyleSheet.create({
 
   loginButtonContainer: {
     position: "absolute",
-    bottom: 50,
-    width: "80%",
+    bottom: 25,
+    width: "100%",
+    paddingHorizontal: "10%",
     justifyContent: "center",
     alignContent: "center",
   },

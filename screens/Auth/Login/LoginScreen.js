@@ -13,6 +13,7 @@ import {
   ScrollView,
   TouchableWithoutFeedback,
   Keyboard,
+  Image,
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import ImageBg from "../../../components/background/Login/imageBg";
@@ -32,6 +33,12 @@ const LoginScreen = ({ navigation }) => {
           keyboardVerticalOffset={Platform.OS === "ios" ? 100 : -50} // Adjust as needed
           style={styles.container}
         >
+          {/* <View>
+            <Image
+              style={styles.logoImage}
+              source={require("../../../assets/backgrounds/buddji_dark.png")}
+            ></Image>
+          </View> */}
           <Text style={[styles.logoText, { zIndex: 1 }]}>LOGO</Text>
           <View style={styles.container}>
             <View style={styles.loginContainer}>
@@ -66,11 +73,12 @@ const LoginScreen = ({ navigation }) => {
                       style={styles.eyeButtonContainer}
                       onPress={togglePasswordVisibility}
                     >
-                      {/* <Feather
+                      <Feather
+                        style={styles.passwordEye}
                         name={passwordVisible ? "eye" : "eye-off"}
-                        size={24}
+                        size={19}
                         color={"#000"}
-                      /> */}
+                      />
                     </TouchableOpacity>
                   </View>
                 </View>
@@ -79,6 +87,16 @@ const LoginScreen = ({ navigation }) => {
                     Forgot your password?
                   </Text>
                 </TouchableOpacity>
+                <View style={styles.dontHaveanAccountContainer}>
+                  <Text style={styles.dontHaveanAccount}>
+                    Don't have an account yet?
+                  </Text>
+                  <TouchableOpacity
+                    onPress={() => navigation.navigate("SignUpScreen")}
+                  >
+                    <Text style={styles.dontHaveanAccountSignUp}>Sign Up</Text>
+                  </TouchableOpacity>
+                </View>
                 {/* <Text style={styles.forgotYourPasswordText}>
                   Forgot your password?
                 </Text> */}

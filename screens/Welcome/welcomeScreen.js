@@ -22,7 +22,10 @@ const WelcomeScreen = ({ navigation }) => {
         </Text>
         <StatusBar style="auto" />
         <View style={styles.welcomeButtonContainer}>
-          <TouchableOpacity style={styles.signUpButton}>
+          <TouchableOpacity
+            style={styles.signUpButton}
+            onPress={() => navigation.navigate("SignUpScreen")}
+          >
             <Text style={styles.signUpButtonText}>Sign Up</Text>
           </TouchableOpacity>
 
