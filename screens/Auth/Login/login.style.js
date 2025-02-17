@@ -123,10 +123,10 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
 
-  passwordEye: {
+  eyeButtonContainer: {
     position: "absolute",
     padding: 5,
-    top: -41,
+    top: 11,
     right: 5,
     zIndex: 2,
   },

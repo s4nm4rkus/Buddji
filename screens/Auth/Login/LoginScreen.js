@@ -18,19 +18,43 @@ import {
 import { Feather } from "@expo/vector-icons";
 import ImageBg from "../../../components/background/Login/imageBg";
 import styles from "./login.style";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../../firebaseConfig";
+import { Alert } from "react-native";
 
 const LoginScreen = ({ navigation }) => {
+  const [email, setEmail] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
+
+  const handleLogin = async () => {
+    if (email && password) {
+      setLoading(true);
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        setLoading(false);
+        navigation.navigate("HomeScreen");
+      } catch (error) {
+        setLoading(false);
+        Alert.alert("Login Failed", error.message);
+      }
+    } else {
+      Alert.alert("Input Error", "Please fill in both fields");
+    }
+  };
+
   return (
     <SafeAreaView style={styles.safeContainer}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <KeyboardAvoidingView
           behavior={Platform.OS === "ios" ? "padding" : "height"}
-          keyboardVerticalOffset={Platform.OS === "ios" ? 100 : -50} // Adjust as needed
+          keyboardVerticalOffset={Platform.OS === "ios" ? 100 : -90} // Adjust as needed
           style={styles.container}
         >
           {/* <View>
@@ -52,7 +76,7 @@ const LoginScreen = ({ navigation }) => {
                     <TextInput
                       placeholder="Enter your email"
                       style={styles.inInput}
-                      onChangeText={(text) => setEmailOrMobile(text)}
+                      onChangeText={(text) => setEmail(text)}
                     />
                   </View>
                 </View>
@@ -97,20 +121,22 @@ const LoginScreen = ({ navigation }) => {
                     <Text style={styles.dontHaveanAccountSignUp}>Sign Up</Text>
                   </TouchableOpacity>
                 </View>
-                {/* <Text style={styles.forgotYourPasswordText}>
-                  Forgot your password?
-                </Text> */}
               </View>
             </View>
             <StatusBar style="auto" />
+
+            {/* {error ? <Text style={styles.errorText}>{error}</Text> : null} */}
           </View>
 
           <View style={styles.loginButtonContainer}>
             <TouchableOpacity
               style={[styles.loginButton, { zIndex: 2 }]}
-              onPress={() => navigation.navigate("LoginScreen")}
+              onPress={handleLogin}
+              disabled={loading}
             >
-              <Text style={styles.loginButtonText}>Login</Text>
+              <Text style={styles.loginButtonText}>
+                {loading ? "Logging in..." : "Login"}
+              </Text>
             </TouchableOpacity>
           </View>
           <ImageBg style={{ zIndex: -1 }} />

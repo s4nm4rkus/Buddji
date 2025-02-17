@@ -3,7 +3,7 @@ import AppNavigator from "./navigation/AppNavigator";
 
 const App = () => {
   const [loaded] = useFonts({
-    MBold: require("./assets/fonts/Montserrat-Bold.ttf"), // Rename font file
+    MBold: require("./assets/fonts/Montserrat-Bold.ttf"),
     MBlack: require("./assets/fonts/Montserrat-Black.ttf"),
     MSemiBold: require("./assets/fonts/Montserrat-SemiBold.ttf"),
     MExtraBold: require("./assets/fonts/Montserrat-ExtraBold.ttf"),
@@ -22,7 +22,7 @@ const App = () => {
   });
 
   if (!loaded) {
-    return null; // Show nothing until fonts are loaded
+    return null;
   }
 
   return <AppNavigator />;

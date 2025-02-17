@@ -106,6 +106,27 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     elevation: 4,
   },
+  inInputEmail: {
+    width: "100%",
+    paddingHorizontal: 8,
+    marginVertical: 5,
+    backgroundColor: "#fff",
+    borderWidth: 0.5,
+    borderColor: "#DFDFDF",
+    borderRadius: 8,
+    elevation: 4,
+  },
+
+  inInputPassword: {
+    width: "100%",
+    paddingHorizontal: 8,
+    marginVertical: 5,
+    backgroundColor: "#fff",
+    borderWidth: 0.5,
+    borderColor: "#DFDFDF",
+    borderRadius: 8,
+    elevation: 4,
+  },
 
   forgotYourPasswordText: {
     fontFamily: "InRegular",
@@ -132,11 +153,10 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
 
-  passwordEye: {
+  eyeButtonContainer: {
     position: "absolute",
-    padding: 5,
-    top: -41,
-    right: 5,
+    top: 15,
+    right: 10,
     zIndex: 2,
   },
 
