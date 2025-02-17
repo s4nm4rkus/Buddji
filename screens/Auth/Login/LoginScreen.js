@@ -39,7 +39,7 @@ const LoginScreen = ({ navigation }) => {
       try {
         await signInWithEmailAndPassword(auth, email, password);
         setLoading(false);
-        navigation.navigate("HomeScreen");
+        navigation.replace("HomeScreen");
       } catch (error) {
         setLoading(false);
         Alert.alert("Login Failed", error.message);

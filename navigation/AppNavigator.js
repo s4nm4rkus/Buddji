@@ -12,19 +12,19 @@ import { auth } from "../firebaseConfig";
 
 const Stack = createStackNavigator();
 
-const AppStack = () => (
-  <Stack.Navigator screenOptions={{ headerShown: false }}>
-    <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
-    <Stack.Screen name="LoginScreen" component={LoginScreen} />
-    <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
-  </Stack.Navigator>
-);
+// const AuthStack = () => (
+//   <Stack.Navigator screenOptions={{ headerShown: false }}>
+//     <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
+//     <Stack.Screen name="LoginScreen" component={LoginScreen} />
+//     <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
+//   </Stack.Navigator>
+// );
 
-const AuthStack = () => (
-  <Stack.Navigator screenOptions={{ headerShown: true }}>
-    <Stack.Screen name="HomeScreen" component={HomeScreen} />
-  </Stack.Navigator>
-);
+// const AppStack = () => (
+//   <Stack.Navigator screenOptions={{ headerShown: true }}>
+//     <Stack.Screen name="HomeScreen" component={HomeScreen} />
+//   </Stack.Navigator>
+// );
 
 const AppNavigator = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(null);
@@ -45,8 +45,42 @@ const AppNavigator = () => {
     );
   }
   return (
+    // <NavigationContainer>
+    //   {isLoggedIn ? <AuthStack /> : <AppStack />}
+    // </NavigationContainer>
+
     <NavigationContainer>
-      {isLoggedIn ? <AuthStack /> : <AppStack />}
+      <Stack.Navigator
+        initialRouteName={isLoggedIn ? "HomeScreen" : "WelcomeScreen"}
+        screenOptions={({ route }) => ({
+          headerShown: route.name === "HomeScreen",
+        })}
+      >
+        <Stack.Screen
+          name="WelcomeScreen"
+          component={WelcomeScreen}
+          headerShown={false}
+        />
+        <Stack.Screen
+          name="LoginScreen"
+          component={LoginScreen}
+          headerShown={false}
+        />
+        <Stack.Screen
+          name="SignUpScreen"
+          component={SignUpScreen}
+          headerShown={false}
+        />
+        <Stack.Screen
+          name="HomeScreen"
+          component={HomeScreen}
+          options={{
+            headerShown: true,
+            headerLeft: null,
+            gestureEnabled: false,
+          }}
+        />
+      </Stack.Navigator>
     </NavigationContainer>
   );
 };
