@@ -33,19 +33,46 @@ const LoginScreen = ({ navigation }) => {
     setPasswordVisible(!passwordVisible);
   };
 
+  // const handleLogin = async () => {
+  //   if (email && password) {
+  //     setLoading(true);
+  //     try {
+  //       await signInWithEmailAndPassword(auth, email, password);
+  //       setLoading(false);
+  //       navigation.replace("HomeScreen");
+  //     } catch (error) {
+  //       setLoading(false);
+  //       Alert.alert("Login Failed", error.message);
+  //     }
+  //   } else {
+  //     Alert.alert("Input Error", "Please fill in both fields");
+  //   }
+  // };
+
   const handleLogin = async () => {
-    if (email && password) {
-      setLoading(true);
-      try {
-        await signInWithEmailAndPassword(auth, email, password);
-        setLoading(false);
-        navigation.replace("HomeScreen");
-      } catch (error) {
-        setLoading(false);
-        Alert.alert("Login Failed", error.message);
+    if (!email.trim() || !password.trim()) {
+      Alert.alert("Input Error", "Please fill in both fields.");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      await signInWithEmailAndPassword(auth, email.trim(), password);
+      navigation.replace("HomeScreen");
+    } catch (error) {
+      let errorMessage = "Login Failed. Please try again.";
+
+      if (error.code === "auth/invalid-email") {
+        errorMessage = "Invalid email format.";
+      } else if (error.code === "auth/user-not-found") {
+        errorMessage = "No account found with this email.";
+      } else if (error.code === "auth/wrong-password") {
+        errorMessage = "Incorrect password.";
       }
-    } else {
-      Alert.alert("Input Error", "Please fill in both fields");
+
+      Alert.alert("Login Failed", errorMessage);
+    } finally {
+      setLoading(false);
     }
   };
 

@@ -2,6 +2,7 @@ import { initializeApp } from "firebase/app";
 import {
   getAuth,
   initializeAuth,
+  onAuthStateChanged,
   createUserWithEmailAndPassword,
   getReactNativePersistence,
 } from "firebase/auth";
@@ -18,10 +19,10 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 
-// const auth = initializeAuth(app, {
-//   persistence: getReactNativePersistence(ReactNativeAsyncStorage),
-// });
+const auth = initializeAuth(app, {
+  persistence: getReactNativePersistence(ReactNativeAsyncStorage),
+});
 
-const auth = getAuth(app);
+// const auth = getAuth(app);
 
-export { auth, createUserWithEmailAndPassword };
+export { auth, createUserWithEmailAndPassword, onAuthStateChanged };

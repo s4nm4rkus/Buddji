@@ -12,6 +12,12 @@ import { auth } from "../firebaseConfig";
 
 const Stack = createStackNavigator();
 
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+AsyncStorage.getAllKeys().then((keys) => {
+  console.log("Stored keys:", keys);
+});
+
 // const AuthStack = () => (
 //   <Stack.Navigator screenOptions={{ headerShown: false }}>
 //     <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
@@ -31,10 +37,15 @@ const AppNavigator = () => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setIsLoggedIn(!!user);
+      console.log("Auth state changed:", user ? "Logged In" : "Logged Out");
+      if (user) {
+        setIsLoggedIn(true);
+      } else {
+        setIsLoggedIn(false);
+      }
     });
 
-    return unsubscribe;
+    return () => unsubscribe();
   }, []);
 
   if (isLoggedIn === null) {
@@ -52,9 +63,9 @@ const AppNavigator = () => {
     <NavigationContainer>
       <Stack.Navigator
         initialRouteName={isLoggedIn ? "HomeScreen" : "WelcomeScreen"}
-        screenOptions={({ route }) => ({
-          headerShown: route.name === "HomeScreen",
-        })}
+        screenOptions={{
+          headerShown: false,
+        }}
       >
         <Stack.Screen
           name="WelcomeScreen"
