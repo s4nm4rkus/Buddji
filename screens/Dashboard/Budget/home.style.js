@@ -16,6 +16,11 @@ const styles = StyleSheet.create({
     borderRadius: "100%",
     width: 60,
     height: 60,
+    shadowOffset: {
+      width: 8,
+      height: 8,
+    },
+    elevation: 2,
   },
 
   budgetListContainer: {
@@ -48,6 +53,50 @@ const styles = StyleSheet.create({
     fontSize: 45,
     color: "#fff",
     textAlign: "center",
+  },
+
+  modalContainer: {
+    flex: 1,
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.2)",
+  },
+  centeredView: {
+    width: "100%",
+    position: "absolute",
+    bottom: 0,
+    flex: 1,
+  },
+  modalView: {
+    width: "100%",
+    height: 150,
+    padding: 20,
+    backgroundColor: "white",
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+
+  modalTextHeader: {
+    fontFamily: "InSemiBold",
+    fontSize: 16,
+  },
+
+  budgetOption: {
+    width: "100%",
+    // backgroundColor: "#ddd",
+    fontFamily: "InSemiBold",
+    fontSize: 16,
+    paddingTop: 15,
   },
 });
 
