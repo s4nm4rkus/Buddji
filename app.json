@@ -4,7 +4,7 @@
     "slug": "buddji",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/main_logo2.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {

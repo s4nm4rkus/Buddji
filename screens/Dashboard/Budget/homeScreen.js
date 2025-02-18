@@ -1,8 +1,15 @@
 import React, { useEffect } from "react";
-import { View, Text, TouchableOpacity, BackHandler } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  BackHandler,
+  StatusBar,
+} from "react-native";
 import { signOut } from "firebase/auth";
 import { auth } from "../../../firebaseConfig";
 import { CommonActions } from "@react-navigation/native";
+import Header from "./header/header";
 // import { useNavigation } from "@react-navigation/native";
 
 const HomeScreen = ({ navigation }) => {
@@ -32,13 +39,15 @@ const HomeScreen = ({ navigation }) => {
   };
   return (
     <View>
-      <Text>HomeScreen</Text>
-      <TouchableOpacity
+      <StatusBar style="auto" />
+      <Header />
+
+      {/* <TouchableOpacity
         onPress={handleLogout}
         style={{ marginTop: 20, backgroundColor: "red", padding: 10 }}
       >
         <Text style={{ color: "white" }}>Logout</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </View>
   );
 };

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, ActivityIndicator } from "react-native";
+import { View, ActivityIndicator, Image } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import WelcomeScreen from "../screens/Welcome/welcomeScreen";
@@ -89,6 +89,22 @@ const AppNavigator = () => {
             headerShown: true,
             headerLeft: null,
             gestureEnabled: false,
+            headerTitleAlign: "center",
+            headerTintColor: "#fff",
+            headerTitle: (props) => (
+              <Image
+                source={require("../assets/logo_word.png")}
+                style={{ width: 120, height: 50 }}
+                resizeMode="contain"
+              />
+            ),
+            headerStyle: {
+              backgroundColor: "#0A4B2D",
+              shadowColor: "#000",
+              shadowOffset: { width: 0, height: 2 },
+              elevation: 15,
+            },
+            headerShadowVisible: true,
           }}
         />
       </Stack.Navigator>
