@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
   },
   modalView: {
     width: "100%",
-    height: 150,
+    height: 200,
     padding: 20,
     backgroundColor: "white",
     borderTopLeftRadius: 20,
@@ -88,15 +88,29 @@ const styles = StyleSheet.create({
 
   modalTextHeader: {
     fontFamily: "InSemiBold",
-    fontSize: 16,
+    fontSize: 18,
+    marginBottom: 10,
   },
 
   budgetOption: {
     width: "100%",
-    // backgroundColor: "#ddd",
-    fontFamily: "InSemiBold",
+    borderRadius: 10,
+    marginVertical: 7,
+    paddingVertical: 10,
+    elevation: 2,
+  },
+
+  textBudgetOption: {
+    color: "white",
+    fontFamily: "InMedium",
     fontSize: 16,
-    paddingTop: 15,
+    textAlign: "center",
+  },
+
+  budgetCard: {
+    backgroundColor: "#fff",
+    height: "100%",
+    flex: 1,
   },
 });
 

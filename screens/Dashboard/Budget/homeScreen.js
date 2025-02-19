@@ -9,6 +9,7 @@ import {
   SafeAreaView,
   Modal,
   Pressable,
+  TouchableWithoutFeedback,
 } from "react-native";
 import { signOut } from "firebase/auth";
 import { auth } from "../../../firebaseConfig";
@@ -40,8 +41,25 @@ const HomeScreen = ({ navigation }) => {
   ]);
 
   const renderItem = ({ item }) => (
-    <TouchableOpacity style={{ padding: 20, borderBottomWidth: 1 }}>
-      <Text>{item.title}</Text>
+    <TouchableOpacity style={[styles.budgetCard]}>
+      <View style={styles.rightArrow}></View>
+      <View style={styles.cardContainer}>
+        <View style={styles.budgetNameWrapper}>
+          <Text>{item.title}</Text>
+          <Text style={styles.budgetName}></Text>
+          <Text style={styles.budgetCattegory}></Text>
+        </View>
+        <View style={styles.budgetTotalWrapper}>
+          <Text style={styles.budgetTotal}></Text>
+          <Text style={styles.budgetTotalSub}>| total allowance</Text>
+        </View>
+        <View style={styles.budgetDurationWrapper}>
+          <Text style={styles.budgetText}> For </Text>
+          <Text style={styles.budgetDate}></Text>
+          <Text style={styles.budgetText}> - </Text>
+          <Text style={styles.budgetDate}></Text>
+        </View>
+      </View>
     </TouchableOpacity>
   );
 
@@ -61,6 +79,10 @@ const HomeScreen = ({ navigation }) => {
         })
       );
     });
+  };
+
+  const toggleModal = () => {
+    setModalVisible(!modalVisible);
   };
 
   return (
@@ -105,28 +127,36 @@ const HomeScreen = ({ navigation }) => {
             setModalVisible(!modalVisible);
           }}
         >
-          <View style={styles.modalContainer}>
-            <View style={styles.centeredView}>
-              <View style={styles.modalView}>
-                <Text style={styles.modalTextHeader}>
-                  Create new budget for...
-                </Text>
-                <TouchableOpacity
-                  style={[styles.budgetOption]}
-                  onPress={() => setModalVisible(!modalVisible)}
-                >
-                  <Text style={styles.textStyle}>Week</Text>
-                </TouchableOpacity>
+          <TouchableWithoutFeedback onPress={toggleModal}>
+            <View style={styles.modalContainer}>
+              <View style={styles.centeredView}>
+                <View style={styles.modalView}>
+                  <Text style={styles.modalTextHeader}>
+                    Create new budget for...
+                  </Text>
+                  <TouchableOpacity
+                    style={[
+                      styles.budgetOption,
+                      { backgroundColor: "#F65C78" },
+                    ]}
+                    onPress={() => setModalVisible(!modalVisible)}
+                  >
+                    <Text style={styles.textBudgetOption}>Week</Text>
+                  </TouchableOpacity>
 
-                <TouchableOpacity
-                  style={[styles.budgetOption]}
-                  onPress={() => setModalVisible(!modalVisible)}
-                >
-                  <Text style={styles.textStyle}>Month</Text>
-                </TouchableOpacity>
+                  <TouchableOpacity
+                    style={[
+                      styles.budgetOption,
+                      { backgroundColor: "#03AED2" },
+                    ]}
+                    onPress={() => setModalVisible(!modalVisible)}
+                  >
+                    <Text style={styles.textBudgetOption}>Month</Text>
+                  </TouchableOpacity>
+                </View>
               </View>
             </View>
-          </View>
+          </TouchableWithoutFeedback>
         </Modal>
       </SafeAreaView>
     </SafeAreaProvider>
