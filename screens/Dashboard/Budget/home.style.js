@@ -25,9 +25,9 @@ const styles = StyleSheet.create({
 
   budgetListContainer: {
     flex: 1,
-    paddingVertical: 50,
+    paddingVertical: 40,
     paddingHorizontal: 20,
-    marginBottom: 50,
+    marginBottom: 20,
     width: "100%",
     height: "100%",
 
@@ -108,9 +108,18 @@ const styles = StyleSheet.create({
   },
 
   budgetCard: {
-    backgroundColor: "#fff",
     height: "100%",
     flex: 1,
+  },
+  cardContainer: {
+    marginVertical: 5,
+    backgroundColor: "#ddd",
+    padding: 20,
+    borderRadius: 8,
+  },
+
+  budgetNameWrapper: {
+    flexDirection: "row",
   },
 });
 

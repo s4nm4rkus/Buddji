@@ -101,15 +101,9 @@ const HomeScreen = ({ navigation }) => {
               refreshing={refreshing}
               onRefresh={onRefresh}
               style={styles.budgetList}
-              ListHeaderComponent={
-                <Text style={{ fontSize: 18, fontWeight: "bold" }}>Header</Text>
-              }
               ListEmptyComponent={
                 <Text style={styles.emptyListText}>No items available</Text>
               }
-              ItemSeparatorComponent={() => (
-                <View style={{ height: 1, backgroundColor: "#ccc" }} />
-              )}
             />
           </View>
           <TouchableOpacity
@@ -149,6 +143,7 @@ const HomeScreen = ({ navigation }) => {
                       styles.budgetOption,
                       { backgroundColor: "#03AED2" },
                     ]}
+                    // onPress={handleLogout}
                     onPress={() => setModalVisible(!modalVisible)}
                   >
                     <Text style={styles.textBudgetOption}>Month</Text>
