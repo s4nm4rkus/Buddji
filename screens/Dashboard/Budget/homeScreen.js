@@ -17,6 +17,7 @@ import { CommonActions } from "@react-navigation/native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import Header from "./header/header";
 import styles from "./home.style";
+import { Feather } from "@expo/vector-icons";
 
 // import { useNavigation } from "@react-navigation/native";
 
@@ -35,32 +36,37 @@ const HomeScreen = ({ navigation }) => {
   }, []);
 
   const [data, setData] = useState([
-    { id: "1", title: "Item 1" },
-    { id: "2", title: "Item 2" },
-    { id: "3", title: "Item 3" },
+    { id: "1", title: "Week" },
+    { id: "2", title: "Week" },
+    { id: "3", title: "Week" },
+    { id: "4", title: "Week" },
+    { id: "5", title: "Week" },
+    { id: "6", title: "Week" },
   ]);
 
   const renderItem = ({ item }) => (
-    <TouchableOpacity style={[styles.budgetCard]}>
-      <View style={styles.rightArrow}></View>
-      <View style={styles.cardContainer}>
-        <View style={styles.budgetNameWrapper}>
-          <Text>{item.title}</Text>
-          <Text style={styles.budgetName}></Text>
-          <Text style={styles.budgetCattegory}></Text>
+    <View style={styles.cardContainerBudget}>
+      <TouchableOpacity style={[styles.budgetCard]}>
+        <View style={styles.cardContainer}>
+          <Feather
+            style={styles.rightChevron}
+            name="chevron-right"
+            size={24}
+            color="black"
+          />
+          <View style={styles.budgetNameWrapper}>
+            <Text style={styles.budgetCattegory}>{item.title}</Text>
+            <Text style={styles.budgetText}> | For </Text>
+            <Text style={styles.budgetDate}>January 1</Text>
+            <Text style={styles.budgetText}> to </Text>
+            <Text style={styles.budgetDate}>January 7</Text>
+          </View>
+          <Text style={styles.budgetName}>Budget Sample Name</Text>
+          <Text style={styles.budgetTotal}>P 2,980.00</Text>
+          <Text style={styles.budgetTotalSub}>- total allowance</Text>
         </View>
-        <View style={styles.budgetTotalWrapper}>
-          <Text style={styles.budgetTotal}></Text>
-          <Text style={styles.budgetTotalSub}>| total allowance</Text>
-        </View>
-        <View style={styles.budgetDurationWrapper}>
-          <Text style={styles.budgetText}> For </Text>
-          <Text style={styles.budgetDate}></Text>
-          <Text style={styles.budgetText}> - </Text>
-          <Text style={styles.budgetDate}></Text>
-        </View>
-      </View>
-    </TouchableOpacity>
+      </TouchableOpacity>
+    </View>
   );
 
   const [refreshing, setRefreshing] = useState(false);
@@ -68,6 +74,11 @@ const HomeScreen = ({ navigation }) => {
   const onRefresh = () => {
     setRefreshing(true);
     setTimeout(() => setRefreshing(false), 2000);
+  };
+
+  const handleBudgetCreation = (type) => {
+    setModalVisible(false);
+    navigation.navigate("CreateBudgetScreen", { budgetType: type });
   };
 
   const handleLogout = () => {
@@ -92,6 +103,15 @@ const HomeScreen = ({ navigation }) => {
           <StatusBar style="auto" />
           <Header />
           <View style={styles.budgetListContainer}>
+            <Text
+              style={{
+                fontSize: 16,
+                fontFamily: "InSemiBold",
+                marginBottom: 5,
+              }}
+            >
+              My budget list
+            </Text>
             <FlatList
               data={data}
               keyExtractor={(item) => item.id}
@@ -133,7 +153,7 @@ const HomeScreen = ({ navigation }) => {
                       styles.budgetOption,
                       { backgroundColor: "#F65C78" },
                     ]}
-                    onPress={() => setModalVisible(!modalVisible)}
+                    onPress={() => handleBudgetCreation("Week")}
                   >
                     <Text style={styles.textBudgetOption}>Week</Text>
                   </TouchableOpacity>
@@ -144,7 +164,7 @@ const HomeScreen = ({ navigation }) => {
                       { backgroundColor: "#03AED2" },
                     ]}
                     // onPress={handleLogout}
-                    onPress={() => setModalVisible(!modalVisible)}
+                    onPress={() => handleBudgetCreation("Month")}
                   >
                     <Text style={styles.textBudgetOption}>Month</Text>
                   </TouchableOpacity>

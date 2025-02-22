@@ -9,7 +9,7 @@ const Header = ({ navigation }) => {
     <View style={styles.container}>
       <View style={styles.headerContainer}>
         <View style={styles.arrowLeftContainer}>
-          <Text style={styles.titleHeader}>My Budget</Text>
+          <Text style={styles.titleHeader}>Budget</Text>
         </View>
       </View>
     </View>

@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 20,
     fontFamily: "InSemiBold",
-    marginLeft: 24,
+    marginLeft: 20,
   },
 });
 

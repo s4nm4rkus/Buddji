@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
 
   addBudgetButton: {
     position: "absolute",
-    bottom: 20,
+    bottom: 10,
     left: "43%",
     justifyContent: "center",
     alignContent: "center",
@@ -25,9 +25,10 @@ const styles = StyleSheet.create({
 
   budgetListContainer: {
     flex: 1,
-    paddingVertical: 40,
+    paddingTop: 10,
     paddingHorizontal: 20,
-    marginBottom: 20,
+    marginBottom: 50,
+
     width: "100%",
     height: "100%",
 
@@ -108,19 +109,64 @@ const styles = StyleSheet.create({
   },
 
   budgetCard: {
-    height: "100%",
     flex: 1,
+    backgroundColor: "transparent",
   },
   cardContainer: {
-    marginVertical: 5,
-    backgroundColor: "#ddd",
-    padding: 20,
+    paddingVertical: 10,
+    paddingLeft: 15,
     borderRadius: 8,
+    borderRightWidth: 15,
+    borderRightColor: "#F65C78",
+  },
+
+  cardColorTheme: {
+    flexDirection: "row",
   },
 
   budgetNameWrapper: {
     flexDirection: "row",
   },
+
+  budgetDate: {
+    fontFamily: "InMedium",
+    fontSize: 12,
+  },
+
+  budgetText: {
+    fontFamily: "InMedium",
+    fontSize: 12,
+  },
+
+  budgetCattegory: {
+    fontFamily: "InBold",
+    fontSize: 12,
+    color: "#F65C78",
+  },
+  cardContainerBudget: {
+    backgroundColor: "#fff",
+    marginVertical: 5,
+    padding: 0,
+    borderRadius: 8,
+    elevation: 1.8,
+  },
+
+  budgetName: {
+    fontFamily: "InSemiBold",
+    fontSize: 14,
+  },
+  budgetTotal: {
+    fontFamily: "InExtraBold",
+    fontSize: 20,
+    color: "#17975C",
+  },
+  rightChevron: {
+    position: "absolute",
+    right: 5,
+    top: 39,
+  },
+
+  budgetTotalSub: { fontFamily: "InMedium", fontSize: 10, marginTop: -2 },
 });
 
 export default styles;

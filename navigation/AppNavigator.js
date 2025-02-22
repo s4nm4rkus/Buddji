@@ -6,7 +6,7 @@ import WelcomeScreen from "../screens/Welcome/welcomeScreen";
 import HomeScreen from "../screens/Dashboard/Budget/homeScreen";
 import LoginScreen from "../screens/Auth/Login/LoginScreen";
 import SignUpScreen from "../screens/Auth/SignUp/signUpScreen";
-
+import CreateBudgetScreen from "../screens/CreateBudget/createBudgetScreen";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebaseConfig";
 
@@ -106,6 +106,11 @@ const AppNavigator = () => {
             },
             headerShadowVisible: true,
           }}
+        />
+
+        <Stack.Screen
+          name="CreateBudgetScreen"
+          component={CreateBudgetScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>
