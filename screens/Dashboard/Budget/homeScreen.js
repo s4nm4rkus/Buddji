@@ -78,7 +78,7 @@ const HomeScreen = ({ navigation }) => {
 
   const handleBudgetCreation = (type) => {
     setModalVisible(false);
-    navigation.navigate("CreateBudgetScreen", { budgetType: type });
+    navigation.navigate("SelectBudgetingHabitScreen", { budgetType: type });
   };
 
   const handleLogout = () => {

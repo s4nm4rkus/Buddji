@@ -7,6 +7,7 @@ import HomeScreen from "../screens/Dashboard/Budget/homeScreen";
 import LoginScreen from "../screens/Auth/Login/LoginScreen";
 import SignUpScreen from "../screens/Auth/SignUp/signUpScreen";
 import CreateBudgetScreen from "../screens/CreateBudget/createBudgetScreen";
+import SelectBudgetingHabitScreen from "../screens/CreateBudget/SelectBudgetingHabit/selectBudgetHabitScreen";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebaseConfig";
 
@@ -111,6 +112,11 @@ const AppNavigator = () => {
         <Stack.Screen
           name="CreateBudgetScreen"
           component={CreateBudgetScreen}
+        />
+
+        <Stack.Screen
+          name="SelectBudgetingHabitScreen"
+          component={SelectBudgetingHabitScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>
