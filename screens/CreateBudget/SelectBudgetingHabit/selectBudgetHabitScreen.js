@@ -10,7 +10,9 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   Modal,
+  ScrollView,
 } from "react-native";
+import { Feather } from "@expo/vector-icons";
 import ImageBg from "../../../components/background/Welcome/imageBg";
 import styles from "./selectbudgeting.style";
 
@@ -76,7 +78,7 @@ const SelectBudgetingHabitScreen = ({ navigation, route }) => {
             </View>
             <Image
               source={require("../../../assets/icons/spender.png")}
-              style={{ width: 130, height: 110 }}
+              style={{ width: 130, height: 110, transform: [{ scaleX: -1 }] }}
             />
           </TouchableOpacity>
           <TouchableOpacity
@@ -108,73 +110,301 @@ const SelectBudgetingHabitScreen = ({ navigation, route }) => {
           setModalVisible(!modalVisible);
         }}
       >
-        <TouchableWithoutFeedback onPress={closeModal}>
+        <TouchableWithoutFeedback>
           <View style={styles.modalContainer}>
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
                 {selectedHabit === "Saver" && (
                   <>
-                    <Text style={styles.modalTextHeader}>Saver Habit</Text>
-                    <Text style={styles.modalText}>
-                      As a saver, you prioritize saving before spending.
-                    </Text>
-                    <Text style={styles.modalText}>
-                      Selected Habit: {selectedHabit}
-                      Selected BudgetType: {budgetType}
-                    </Text>
+                    <TouchableOpacity onPress={closeModal}>
+                      <Feather
+                        style={styles.leftChevron}
+                        name="chevron-left"
+                        size={28}
+                        color="black"
+                      />
+                    </TouchableOpacity>
+                    <View style={styles.modalTextContainer}>
+                      <Text style={styles.modalTextHeader}>Saver</Text>
+                      <Text style={styles.modalText}>
+                        Focus on saving a lot and keeping spending to a minimum.
+                      </Text>
+                      {/* <Text style={styles.modalText}>
+                        Selected Habit: {selectedHabit}
+                        Selected BudgetType: {budgetType}
+                      </Text> */}
+                    </View>
+                    <ScrollView>
+                      <View style={styles.tipsContainer}>
+                        <Text style={styles.tipsdHeader}>Tips:</Text>
+
+                        <Text
+                          style={[styles.modalText, { fontFamily: "InBold" }]}
+                        >
+                          1. Save First, Spend Later
+                        </Text>
+                        <Text style={[styles.modalText, { marginBottom: 10 }]}>
+                          Automatically set aside money for savings before
+                          spending on anything else.
+                        </Text>
+                        <Text
+                          style={[styles.modalText, { fontFamily: "InBold" }]}
+                        >
+                          2. Stick to a Strict Budget
+                        </Text>
+                        <Text style={[styles.modalText, { marginBottom: 10 }]}>
+                          Plan your expenses and track every peso to avoid
+                          unnecessary spending.
+                        </Text>
+                        <Text
+                          style={[styles.modalText, { fontFamily: "InBold" }]}
+                        >
+                          3. Cut Unnecessary Costs
+                        </Text>
+                        <Text style={[styles.modalText, { marginBottom: 10 }]}>
+                          Plan your expenses and track every peso to avoid
+                          unnecessary spending.
+                        </Text>
+                        <Text
+                          style={[styles.modalText, { fontFamily: "InBold" }]}
+                        >
+                          4. Avoid Impulse Buying
+                        </Text>
+                        <Text style={[styles.modalText, { marginBottom: 10 }]}>
+                          Wait before making non-essential purchases to see if
+                          you really need them.
+                        </Text>
+                        <Text
+                          style={[styles.modalText, { fontFamily: "InBold" }]}
+                        >
+                          5. Invest for Growth
+                        </Text>
+                        <Text style={[styles.modalText, { marginBottom: 10 }]}>
+                          Put savings into investments that generate passive
+                          income instead of letting money sit idle.
+                        </Text>
+                      </View>
+                    </ScrollView>
+                    <Image
+                      source={require("../../../assets/icons/saver.png")}
+                      style={[
+                        styles.bottomImage,
+                        {
+                          width: 380,
+                          height: 300,
+                          right: -50,
+                          zIndex: -1,
+                          opacity: 0.5,
+                        },
+                      ]}
+                    />
                     <TouchableOpacity
                       style={[
                         styles.budgetOption,
-                        { backgroundColor: "#F65C78" },
+                        { backgroundColor: "#17975C", bottom: 25 },
                       ]}
                       onPress={closeModal}
                     >
-                      <Text style={styles.textBudgetOption}>Got it!</Text>
+                      <Text style={styles.textBudgetOption}>
+                        Select this Habit
+                      </Text>
                     </TouchableOpacity>
                   </>
                 )}
 
                 {selectedHabit === "Spender" && (
                   <>
-                    <Text style={styles.modalTextHeader}>Spender Habit</Text>
-                    <Text style={styles.modalText}>
-                      As a spender, you enjoy spending first and saving later.
-                    </Text>
-                    <Text style={styles.modalText}>
-                      Selected Habit: {selectedHabit}
-                      Selected BudgetType: {budgetType}
-                    </Text>
+                    <TouchableOpacity onPress={closeModal}>
+                      <Feather
+                        style={styles.leftChevron}
+                        name="chevron-left"
+                        size={28}
+                        color="black"
+                      />
+                    </TouchableOpacity>
+                    <View style={styles.modalTextContainer}>
+                      <Text style={styles.modalTextHeader}>Spender</Text>
+                      <Text style={styles.modalText}>
+                        Focus on saving a lot and keeping spending to a minimum.
+                      </Text>
+                      {/* <Text style={styles.modalText}>
+                        Selected Habit: {selectedHabit}
+                        Selected BudgetType: {budgetType}
+                      </Text> */}
+                    </View>
+                    <ScrollView>
+                      <View style={styles.tipsContainer}>
+                        <Text style={styles.tipsdHeader}>Tips:</Text>
+
+                        <Text
+                          style={[styles.modalText, { fontFamily: "InBold" }]}
+                        >
+                          1. Save First, Spend Later
+                        </Text>
+                        <Text style={[styles.modalText, { marginBottom: 10 }]}>
+                          Automatically set aside money for savings before
+                          spending on anything else.
+                        </Text>
+                        <Text
+                          style={[styles.modalText, { fontFamily: "InBold" }]}
+                        >
+                          2. Stick to a Strict Budget
+                        </Text>
+                        <Text style={[styles.modalText, { marginBottom: 10 }]}>
+                          Plan your expenses and track every peso to avoid
+                          unnecessary spending.
+                        </Text>
+                        <Text
+                          style={[styles.modalText, { fontFamily: "InBold" }]}
+                        >
+                          3. Cut Unnecessary Costs
+                        </Text>
+                        <Text style={[styles.modalText, { marginBottom: 10 }]}>
+                          Plan your expenses and track every peso to avoid
+                          unnecessary spending.
+                        </Text>
+                        <Text
+                          style={[styles.modalText, { fontFamily: "InBold" }]}
+                        >
+                          4. Avoid Impulse Buying
+                        </Text>
+                        <Text style={[styles.modalText, { marginBottom: 10 }]}>
+                          Wait before making non-essential purchases to see if
+                          you really need them.
+                        </Text>
+                        <Text
+                          style={[styles.modalText, { fontFamily: "InBold" }]}
+                        >
+                          5. Invest for Growth
+                        </Text>
+                        <Text style={[styles.modalText, { marginBottom: 10 }]}>
+                          Put savings into investments that generate passive
+                          income instead of letting money sit idle.
+                        </Text>
+                      </View>
+                    </ScrollView>
+                    <Image
+                      source={require("../../../assets/icons/spender.png")}
+                      style={[
+                        styles.bottomImage,
+                        {
+                          width: 340,
+                          height: 280,
+                          right: -35,
+                          zIndex: -1,
+                          opacity: 0.4,
+                          transform: [{ scaleX: -1 }],
+                        },
+                      ]}
+                    />
                     <TouchableOpacity
                       style={[
                         styles.budgetOption,
-                        { backgroundColor: "#03AED2" },
+                        { backgroundColor: "#17975C", bottom: 25 },
                       ]}
                       onPress={closeModal}
                     >
-                      <Text style={styles.textBudgetOption}>Understood</Text>
+                      <Text style={styles.textBudgetOption}>
+                        Select this Habit
+                      </Text>
                     </TouchableOpacity>
                   </>
                 )}
 
                 {selectedHabit === "Strategist" && (
                   <>
-                    <Text style={styles.modalTextHeader}>Strategist Habit</Text>
-                    <Text style={styles.modalText}>
-                      As a strategist, you manage both saving and spending
-                      wisely.
-                    </Text>
-                    <Text style={styles.modalText}>
-                      Selected Habit: {selectedHabit}
-                      Selected BudgetType: {budgetType}
-                    </Text>
+                    <TouchableOpacity onPress={closeModal}>
+                      <Feather
+                        style={styles.leftChevron}
+                        name="chevron-left"
+                        size={28}
+                        color="black"
+                      />
+                    </TouchableOpacity>
+                    <View style={styles.modalTextContainer}>
+                      <Text style={styles.modalTextHeader}>Strategist</Text>
+                      <Text style={styles.modalText}>
+                        Focus on saving a lot and keeping spending to a minimum.
+                      </Text>
+                      {/* <Text style={styles.modalText}>
+                        Selected Habit: {selectedHabit}
+                        Selected BudgetType: {budgetType}
+                      </Text> */}
+                    </View>
+                    <ScrollView>
+                      <View style={styles.tipsContainer}>
+                        <Text style={styles.tipsdHeader}>Tips:</Text>
+
+                        <Text
+                          style={[styles.modalText, { fontFamily: "InBold" }]}
+                        >
+                          1. Save First, Spend Later
+                        </Text>
+                        <Text style={[styles.modalText, { marginBottom: 10 }]}>
+                          Automatically set aside money for savings before
+                          spending on anything else.
+                        </Text>
+                        <Text
+                          style={[styles.modalText, { fontFamily: "InBold" }]}
+                        >
+                          2. Stick to a Strict Budget
+                        </Text>
+                        <Text style={[styles.modalText, { marginBottom: 10 }]}>
+                          Plan your expenses and track every peso to avoid
+                          unnecessary spending.
+                        </Text>
+                        <Text
+                          style={[styles.modalText, { fontFamily: "InBold" }]}
+                        >
+                          3. Cut Unnecessary Costs
+                        </Text>
+                        <Text style={[styles.modalText, { marginBottom: 10 }]}>
+                          Plan your expenses and track every peso to avoid
+                          unnecessary spending.
+                        </Text>
+                        <Text
+                          style={[styles.modalText, { fontFamily: "InBold" }]}
+                        >
+                          4. Avoid Impulse Buying
+                        </Text>
+                        <Text style={[styles.modalText, { marginBottom: 10 }]}>
+                          Wait before making non-essential purchases to see if
+                          you really need them.
+                        </Text>
+                        <Text
+                          style={[styles.modalText, { fontFamily: "InBold" }]}
+                        >
+                          5. Invest for Growth
+                        </Text>
+                        <Text style={[styles.modalText, { marginBottom: 10 }]}>
+                          Put savings into investments that generate passive
+                          income instead of letting money sit idle.
+                        </Text>
+                      </View>
+                    </ScrollView>
+                    <Image
+                      source={require("../../../assets/icons/strategist.png")}
+                      style={[
+                        styles.bottomImage,
+                        {
+                          width: 330,
+                          height: 290,
+                          right: -30,
+                          zIndex: -1,
+                          opacity: 0.3,
+                        },
+                      ]}
+                    />
                     <TouchableOpacity
                       style={[
                         styles.budgetOption,
-                        { backgroundColor: "#FFD700" },
+                        { backgroundColor: "#17975C" },
                       ]}
                       onPress={closeModal}
                     >
-                      <Text style={styles.textBudgetOption}>Proceed</Text>
+                      <Text style={styles.textBudgetOption}>
+                        Select this Habit
+                      </Text>
                     </TouchableOpacity>
                   </>
                 )}
