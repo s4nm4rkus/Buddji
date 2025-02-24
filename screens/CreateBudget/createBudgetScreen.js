@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -6,14 +6,20 @@ import {
   TouchableOpacity,
   SafeAreaView,
 } from "react-native";
+import { getAuth } from "firebase/auth";
+import { collection, addDoc } from "firebase/firestore";
+import { db } from "../../firebaseConfig"; // Import Firestore
 import styles from "./createbudget.styles";
 
 const CreateBudget = ({ navigation, route }) => {
-  const { budgetType } = route.params; // Get Week/Month selection
+  const { budgetType } = route.params;
+  const { selectedHabit } = route.params;
+  const [userId, setUserId] = useState(null);
 
   const [step, setStep] = useState(1);
   const [budgetData, setBudgetData] = useState({
-    title: "",
+    userId: "",
+    budgetTitle: "",
     totalBudget: "",
     startBudgetDuration: "",
     endBudgetDuration: "",
@@ -25,6 +31,38 @@ const CreateBudget = ({ navigation, route }) => {
     note: "",
   });
 
+  useEffect(() => {
+    const auth = getAuth();
+    const user = auth.currentUser;
+
+    if (user) {
+      setUserId(user.uid);
+      setBudgetData((prev) => ({ ...prev, userId: user.uid }));
+    }
+  }, []);
+
+  const handleSaveBudget = async () => {
+    try {
+      if (!userId) {
+        alert("User not found. Please log in again.");
+        return;
+      }
+      const newBudget = {
+        ...budgetData,
+        budgetType,
+        selectedHabit,
+        createdAt: new Date(),
+      };
+
+      await addDoc(collection(db, "budgets"), newBudget);
+      alert("Budget Saved Successfully!");
+      navigation.goBack();
+    } catch (error) {
+      console.error("Error saving budget:", error);
+      alert("Failed to save budget. Please try again.");
+    }
+  };
+
   const handleNext = () => {
     if (step < 5) setStep(step + 1);
   };
@@ -33,17 +71,14 @@ const CreateBudget = ({ navigation, route }) => {
     if (step > 1) setStep(step - 1);
   };
 
-  const handleSubmit = () => {
-    alert("Budget Created Successfully!");
-    navigation.goBack();
-  };
-
   return (
     <SafeAreaView style={styles.container}>
       {/* Budget Title & Total Budget (Only input on Step 1, Display in Steps 2-5) */}
       {step === 1 ? (
         <>
-          <Text style={styles.header}>Create Budget ({budgetType})</Text>
+          <Text style={styles.header}>
+            Create Budget ({budgetType}) ({selectedHabit})
+          </Text>
           <Text>Budget Title</Text>
 
           <TextInput
@@ -51,7 +86,7 @@ const CreateBudget = ({ navigation, route }) => {
             style={styles.input}
             value={budgetData.title}
             onChangeText={(text) =>
-              setBudgetData({ ...budgetData, title: text })
+              setBudgetData({ ...budgetData, budgetTitle: text })
             }
           />
           <Text>Total allowance</Text>
@@ -197,7 +232,10 @@ const CreateBudget = ({ navigation, route }) => {
             <Text>Next</Text>
           </TouchableOpacity>
         ) : (
-          <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
+          <TouchableOpacity
+            style={styles.submitButton}
+            onPress={handleSaveBudget}
+          >
             <Text>Submit</Text>
           </TouchableOpacity>
         )}

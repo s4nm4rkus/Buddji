@@ -21,9 +21,12 @@ const SelectBudgetingHabitScreen = ({ navigation, route }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedHabit, setSelectedHabit] = useState(null);
 
-  const handleBudgetCreation = () => {
+  const handleBudgetCreation = (habit) => {
     setModalVisible(false);
-    navigation.navigate("CreateBudgetScreen", { budgetType, selectedHabit });
+    navigation.navigate("CreateBudgetScreen", {
+      budgetType,
+      selectedHabit: habit,
+    });
   };
 
   const openModal = (habit) => {
@@ -141,47 +144,47 @@ const SelectBudgetingHabitScreen = ({ navigation, route }) => {
                         <Text
                           style={[styles.modalText, { fontFamily: "InBold" }]}
                         >
-                          1. Save First, Spend Later
+                          1. Save a Fixed Percentage
                         </Text>
                         <Text style={[styles.modalText, { marginBottom: 10 }]}>
-                          Automatically set aside money for savings before
-                          spending on anything else.
+                          Set aside at least 20% of your income or allowance
+                          before spending.
                         </Text>
                         <Text
                           style={[styles.modalText, { fontFamily: "InBold" }]}
                         >
-                          2. Stick to a Strict Budget
+                          2. Create a Spending Plan
                         </Text>
                         <Text style={[styles.modalText, { marginBottom: 10 }]}>
-                          Plan your expenses and track every peso to avoid
-                          unnecessary spending.
+                          Budget based on what remains after saving, covering
+                          essentials first.
                         </Text>
                         <Text
                           style={[styles.modalText, { fontFamily: "InBold" }]}
                         >
-                          3. Cut Unnecessary Costs
+                          3. Track and Adjust
                         </Text>
                         <Text style={[styles.modalText, { marginBottom: 10 }]}>
-                          Plan your expenses and track every peso to avoid
-                          unnecessary spending.
+                          Keep a record of expenses to avoid overspending and
+                          adjust as needed.
                         </Text>
                         <Text
                           style={[styles.modalText, { fontFamily: "InBold" }]}
                         >
-                          4. Avoid Impulse Buying
+                          4. Avoid Unnecessary Purchases
                         </Text>
                         <Text style={[styles.modalText, { marginBottom: 10 }]}>
-                          Wait before making non-essential purchases to see if
-                          you really need them.
+                          Differentiate between wants and needs to prevent
+                          impulse spending.
                         </Text>
                         <Text
                           style={[styles.modalText, { fontFamily: "InBold" }]}
                         >
-                          5. Invest for Growth
+                          5. Set Savings Goals
                         </Text>
                         <Text style={[styles.modalText, { marginBottom: 10 }]}>
-                          Put savings into investments that generate passive
-                          income instead of letting money sit idle.
+                          Whether short-term (emergencies) or long-term
+                          (investments), have clear financial targets.
                         </Text>
                       </View>
                     </ScrollView>
@@ -203,7 +206,7 @@ const SelectBudgetingHabitScreen = ({ navigation, route }) => {
                         styles.budgetOption,
                         { backgroundColor: "#17975C", bottom: 25 },
                       ]}
-                      onPress={closeModal}
+                      onPress={() => handleBudgetCreation(selectedHabit)}
                     >
                       <Text style={styles.textBudgetOption}>
                         Select this Habit
@@ -239,47 +242,47 @@ const SelectBudgetingHabitScreen = ({ navigation, route }) => {
                         <Text
                           style={[styles.modalText, { fontFamily: "InBold" }]}
                         >
-                          1. Save First, Spend Later
+                          1. Set a Spending Limit
                         </Text>
                         <Text style={[styles.modalText, { marginBottom: 10 }]}>
-                          Automatically set aside money for savings before
-                          spending on anything else.
+                          Decide how much you can realistically spend each month
+                          without overspending.
                         </Text>
                         <Text
                           style={[styles.modalText, { fontFamily: "InBold" }]}
                         >
-                          2. Stick to a Strict Budget
+                          2. Track Expenses
                         </Text>
                         <Text style={[styles.modalText, { marginBottom: 10 }]}>
-                          Plan your expenses and track every peso to avoid
-                          unnecessary spending.
+                          Monitor where your money goes to avoid unnecessary
+                          spending.
                         </Text>
                         <Text
                           style={[styles.modalText, { fontFamily: "InBold" }]}
                         >
-                          3. Cut Unnecessary Costs
+                          3. Use the 80/20 Rule
                         </Text>
                         <Text style={[styles.modalText, { marginBottom: 10 }]}>
-                          Plan your expenses and track every peso to avoid
-                          unnecessary spending.
+                          Spend up to 80% of your income/allowance and save at
+                          least 20%.
                         </Text>
                         <Text
                           style={[styles.modalText, { fontFamily: "InBold" }]}
                         >
-                          4. Avoid Impulse Buying
+                          4. Prioritize Needs Over Wants
                         </Text>
                         <Text style={[styles.modalText, { marginBottom: 10 }]}>
-                          Wait before making non-essential purchases to see if
-                          you really need them.
+                          Cover essentials first (bills, food, transportation)
+                          before spending on luxuries.
                         </Text>
                         <Text
                           style={[styles.modalText, { fontFamily: "InBold" }]}
                         >
-                          5. Invest for Growth
+                          5. Automate Savings
                         </Text>
                         <Text style={[styles.modalText, { marginBottom: 10 }]}>
-                          Put savings into investments that generate passive
-                          income instead of letting money sit idle.
+                          Set up an automatic transfer to savings so you’re not
+                          tempted to spend everything.
                         </Text>
                       </View>
                     </ScrollView>
@@ -302,7 +305,7 @@ const SelectBudgetingHabitScreen = ({ navigation, route }) => {
                         styles.budgetOption,
                         { backgroundColor: "#17975C", bottom: 25 },
                       ]}
-                      onPress={closeModal}
+                      onPress={() => handleBudgetCreation(selectedHabit)}
                     >
                       <Text style={styles.textBudgetOption}>
                         Select this Habit
@@ -400,7 +403,7 @@ const SelectBudgetingHabitScreen = ({ navigation, route }) => {
                         styles.budgetOption,
                         { backgroundColor: "#17975C" },
                       ]}
-                      onPress={closeModal}
+                      onPress={() => handleBudgetCreation(selectedHabit)}
                     >
                       <Text style={styles.textBudgetOption}>
                         Select this Habit
