@@ -127,7 +127,9 @@ const CreateBudget = ({ navigation, route }) => {
       ) : (
         <>
           {/* Display Budget Title & Total Budget */}
-          <Text style={styles.label}>Budget Title: {budgetData.title}</Text>
+          <Text style={styles.label}>
+            Budget Title: {budgetData.budgetTitle}
+          </Text>
           <Text style={styles.label}>
             Total Budget: {budgetData.totalBudget}
           </Text>

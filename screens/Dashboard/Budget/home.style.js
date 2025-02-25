@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
 
   budgetListContainer: {
     flex: 1,
-    paddingTop: 10,
+    paddingTop: 40,
     paddingHorizontal: 20,
     marginBottom: 50,
 
@@ -131,11 +131,13 @@ const styles = StyleSheet.create({
   budgetDate: {
     fontFamily: "InMedium",
     fontSize: 12,
+    color: "#6C6B6B",
   },
 
   budgetText: {
     fontFamily: "InMedium",
     fontSize: 12,
+    color: "#6C6B6B",
   },
 
   budgetCattegory: {
@@ -152,13 +154,14 @@ const styles = StyleSheet.create({
   },
 
   budgetName: {
-    fontFamily: "InSemiBold",
-    fontSize: 14,
+    fontFamily: "InBold",
+    fontSize: 15,
+    color: "#17975C",
   },
   budgetTotal: {
     fontFamily: "InExtraBold",
     fontSize: 20,
-    color: "#17975C",
+    color: "#101010",
   },
   rightChevron: {
     position: "absolute",
