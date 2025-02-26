@@ -25,7 +25,7 @@ import { Feather } from "@expo/vector-icons";
 
 const HomeScreen = ({ navigation }) => {
   const [modalVisible, setModalVisible] = useState(false);
-  const [data, setData] = useState([]);
+  const [sortedData, setData] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
   const [loading, setLoading] = useState(true);
 
@@ -34,7 +34,15 @@ const HomeScreen = ({ navigation }) => {
       setLoading(true);
       try {
         const budgets = await fetchUserBudgets();
-        setData(budgets);
+        const sortedBudgets = budgets
+          .map((budget) => ({
+            ...budget,
+            createdAt: budget.createdAt?.toDate
+              ? budget.createdAt.toDate()
+              : new Date(budget.createdAt),
+          }))
+          .sort((a, b) => b.createdAt - a.createdAt);
+        setData(sortedBudgets);
       } catch (error) {
         console.error("Error fetching budgets:", error);
       } finally {
@@ -58,9 +66,23 @@ const HomeScreen = ({ navigation }) => {
 
   const onRefresh = async () => {
     setRefreshing(true);
-    const budgets = await fetchUserBudgets();
-    setData(budgets);
-    setRefreshing(false);
+    try {
+      const budgets = await fetchUserBudgets();
+      // Sort budgets before updating state
+      const sortedBudgets = budgets
+        .map((budget) => ({
+          ...budget,
+          createdAt: budget.createdAt?.toDate
+            ? budget.createdAt.toDate()
+            : new Date(budget.createdAt),
+        }))
+        .sort((a, b) => b.createdAt - a.createdAt);
+      setData(sortedBudgets);
+    } catch (error) {
+      console.error("Error refreshing budgets:", error);
+    } finally {
+      setRefreshing(false);
+    }
   };
 
   const renderItem = ({ item }) => {
@@ -107,16 +129,16 @@ const HomeScreen = ({ navigation }) => {
     navigation.navigate("SelectBudgetingHabitScreen", { budgetType: type });
   };
 
-  const handleLogout = () => {
-    auth.signOut().then(() => {
-      navigation.dispatch(
-        CommonActions.reset({
-          index: 0,
-          routes: [{ name: "WelcomeScreen" }],
-        })
-      );
-    });
-  };
+  // const handleLogout = () => {
+  //   auth.signOut().then(() => {
+  //     navigation.dispatch(
+  //       CommonActions.reset({
+  //         index: 0,
+  //         routes: [{ name: "WelcomeScreen" }],
+  //       })
+  //     );
+  //   });
+  // };
 
   const toggleModal = () => {
     setModalVisible(!modalVisible);
@@ -127,7 +149,7 @@ const HomeScreen = ({ navigation }) => {
       <SafeAreaView style={styles.dashboardContainer}>
         <View style={styles.dashboardContainer}>
           <StatusBar style="auto" />
-          <Header />
+          <Header navigation={navigation} />
           <View style={styles.budgetListContainer}>
             <Text
               style={{
@@ -148,7 +170,7 @@ const HomeScreen = ({ navigation }) => {
               />
             ) : (
               <FlatList
-                data={data}
+                data={sortedData}
                 keyExtractor={(item) => item.id}
                 renderItem={renderItem}
                 onEndReached={() => console.log("Load more items")}

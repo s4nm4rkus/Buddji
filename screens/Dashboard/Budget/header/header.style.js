@@ -17,6 +17,13 @@ const styles = StyleSheet.create({
     fontFamily: "InSemiBold",
     marginLeft: 20,
   },
+
+  logoutHeader: {
+    color: "#fff",
+    fontSize: 20,
+    fontFamily: "InSemiBold",
+    marginRight: 20,
+  },
 });
 
 export default styles;
