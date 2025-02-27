@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
   },
   imageBg2: {
     position: "absolute", // Position the background image at the bottom
-    top: -60,
+    top: -50,
     left: 0,
     width: "100%",
     height: 500,

@@ -81,16 +81,19 @@ const LoginScreen = ({ navigation }) => {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <KeyboardAvoidingView
           behavior={Platform.OS === "ios" ? "padding" : "height"}
-          keyboardVerticalOffset={Platform.OS === "ios" ? 100 : -90} // Adjust as needed
+          keyboardVerticalOffset={Platform.OS === "ios" ? 100 : -80} // Adjust as needed
           style={styles.container}
         >
-          {/* <View>
-            <Image
-              style={styles.logoImage}
-              source={require("../../../assets/backgrounds/buddji_dark.png")}
-            ></Image>
-          </View> */}
-          <Text style={[styles.logoText, { zIndex: 1 }]}>LOGO</Text>
+          <Image
+            source={require("../../../assets/logo_word.png")}
+            style={{
+              width: 200,
+              height: 200,
+              marginTop: "20%",
+              zIndex: 1,
+            }}
+            resizeMode="contain"
+          />
           <View style={styles.container}>
             <View style={styles.loginContainer}>
               <Text style={[styles.loginText, { zIndex: 1 }]}>Login</Text>

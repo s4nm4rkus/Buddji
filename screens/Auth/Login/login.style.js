@@ -23,20 +23,10 @@ const styles = StyleSheet.create({
     zIndex: 2,
   },
 
-  logoText: {
-    marginTop: 150,
-    fontFamily: "InBlack",
-    justifyContent: "center",
-    alignItems: "center",
-    fontSize: 50,
-    color: "#fff",
-    zIndex: 1,
-    elevation: 2,
-  },
-
   loginContainer: {
     justifyContent: "center",
     alignItems: "center",
+    marginTop: -50,
     zIndex: 1,
   },
 

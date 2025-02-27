@@ -6,6 +6,7 @@ import {
   SafeAreaView,
   ImageBackground,
   TouchableOpacity,
+  Image,
 } from "react-native";
 import ImageBg from "../../components/background/Welcome/imageBg";
 import styles from "./welcome.style";
@@ -13,7 +14,18 @@ import styles from "./welcome.style";
 const WelcomeScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.safeContainer}>
-      <Text style={[styles.logoText, { zIndex: 1 }]}>LOGO</Text>
+      <Image
+        source={require("../../assets/logo_word.png")}
+        style={{
+          width: 200,
+          height: 200,
+          position: "absolute",
+          top: "5%",
+          zIndex: 1,
+        }}
+        resizeMode="contain"
+      />
+
       <View style={styles.container}>
         <Text style={[styles.welcomeText, { zIndex: 1 }]}>Welcome!</Text>
         <Text style={[styles.welcomeGreet, { zIndex: 1 }]}>

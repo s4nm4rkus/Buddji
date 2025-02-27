@@ -9,6 +9,7 @@ import {
   ActivityIndicator,
   Dimensions,
   ScrollView,
+  Alert,
 } from "react-native";
 
 import { PieChart } from "react-native-chart-kit";
@@ -17,6 +18,7 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Feather } from "@expo/vector-icons";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../../firebaseConfig";
+import { deleteDoc } from "firebase/firestore";
 
 import Header from "./header/header";
 import styles from "./budgetdetails.style";
@@ -83,6 +85,35 @@ const BudgetDetailsScreen = ({ navigation, route }) => {
 
     fetchBudgetData();
   }, [budgetId]);
+
+  const handleDelete = async () => {
+    if (!budgetId) return;
+
+    try {
+      // Show confirmation alert
+      Alert.alert(
+        "Delete Budget",
+        "Are you sure you want to delete this budget?",
+        [
+          { text: "Cancel", style: "cancel" },
+          {
+            text: "Delete",
+            style: "destructive",
+            onPress: async () => {
+              // Delete from Firestore
+              await deleteDoc(doc(db, "budgets", budgetId));
+              console.log(`🗑️ Budget with ID ${budgetId} deleted.`);
+
+              // Navigate back to previous screen
+              navigation.navigate("HomeScreen");
+            },
+          },
+        ]
+      );
+    } catch (error) {
+      console.error("❌ Error deleting budget:", error);
+    }
+  };
 
   return (
     <SafeAreaProvider>
@@ -192,7 +223,7 @@ const BudgetDetailsScreen = ({ navigation, route }) => {
                       style={[
                         styles.budgeTitlePie,
                         {
-                          fontSize: 14,
+                          fontSize: 13,
                           fontFamily: "InRegular",
                           textAlign: "center",
                           marginBottom: 25,
@@ -266,7 +297,10 @@ const BudgetDetailsScreen = ({ navigation, route }) => {
                   >
                     <Text style={styles.detail}>{budget.note}.</Text>
                   </View>
-                  <TouchableOpacity style={styles.cancelButton}>
+                  <TouchableOpacity
+                    style={styles.cancelButton}
+                    onPress={handleDelete}
+                  >
                     <Text style={styles.buttonText}>Delete budget</Text>
                   </TouchableOpacity>
                 </View>

@@ -19,8 +19,10 @@ const styles = StyleSheet.create({
   },
 
   logoContainer: {
+    marginTop: 50,
     justifyContent: "center",
     alignItems: "center",
+    marginBottom: -60,
   },
 
   container: {
@@ -30,17 +32,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     zIndex: 2,
-  },
-
-  logoText: {
-    marginTop: 100,
-    fontFamily: "InBlack",
-    justifyContent: "center",
-    alignItems: "center",
-    fontSize: 50,
-    color: "#fff",
-    zIndex: 1,
-    elevation: 2,
   },
 
   loginContainer: {

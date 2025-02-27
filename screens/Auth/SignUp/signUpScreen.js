@@ -65,14 +65,17 @@ const SignUpScreen = ({ navigation }) => {
             contentContainerStyle={{ flexGrow: 1 }}
             keyboardShouldPersistTaps="handled"
           >
-            {/* <View>
-            <Image
-              style={styles.logoImage}
-              source={require("../../../assets/backgrounds/buddji_dark.png")}
-            ></Image>
-          </View> */}
             <View style={styles.logoContainer}>
-              <Text style={[styles.logoText, { zIndex: 1 }]}>LOGO</Text>
+              <Image
+                source={require("../../../assets/logo_word.png")}
+                style={{
+                  width: 200,
+                  height: 200,
+
+                  zIndex: 1,
+                }}
+                resizeMode="contain"
+              />
             </View>
             <View style={styles.container}>
               <View style={styles.loginContainer}>
