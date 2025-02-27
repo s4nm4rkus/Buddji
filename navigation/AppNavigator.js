@@ -8,6 +8,7 @@ import LoginScreen from "../screens/Auth/Login/LoginScreen";
 import SignUpScreen from "../screens/Auth/SignUp/signUpScreen";
 import CreateBudgetScreen from "../screens/CreateBudget/createBudgetScreen";
 import SelectBudgetingHabitScreen from "../screens/CreateBudget/SelectBudgetingHabit/selectBudgetHabitScreen";
+import BudgetDetailsScreen from "../screens/Dashboard/BudgetDetails/budgetDetailsScreen";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebaseConfig";
 
@@ -86,6 +87,32 @@ const AppNavigator = () => {
         <Stack.Screen
           name="HomeScreen"
           component={HomeScreen}
+          options={{
+            headerShown: true,
+            headerLeft: null,
+            gestureEnabled: false,
+            headerTitleAlign: "center",
+            headerTintColor: "#fff",
+            headerTitle: (props) => (
+              <Image
+                source={require("../assets/logo_word.png")}
+                style={{ width: 120, height: 50 }}
+                resizeMode="contain"
+              />
+            ),
+            headerStyle: {
+              backgroundColor: "#0A4B2D",
+              shadowColor: "#000",
+              shadowOffset: { width: 0, height: 2 },
+              elevation: 15,
+            },
+            headerShadowVisible: true,
+          }}
+        />
+
+        <Stack.Screen
+          name="BudgetDetailsScreen"
+          component={BudgetDetailsScreen}
           options={{
             headerShown: true,
             headerLeft: null,

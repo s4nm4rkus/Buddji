@@ -71,7 +71,17 @@ const CreateBudget = ({ navigation, route }) => {
   };
 
   const handleNext = () => {
-    if (step < 5) setStep(step + 1);
+    if (selectedHabit === "Saver") {
+      if (step === 1) setStep(2); // Go to "Savings" first
+      else if (step === 2) setStep(3); // Then "Food"
+      else if (step === 3) setStep(4); // Then "Transport"
+      else if (step === 4) setStep(5); // Then "Wants"
+    } else {
+      if (step === 1) setStep(2); // Go to "Food" first
+      else if (step === 2) setStep(3); // Then "Transport"
+      else if (step === 3) setStep(4); // Then "Wants"
+      else if (step === 4) setStep(5); // Then "Savings" last
+    }
   };
 
   const handleBack = () => {
@@ -125,7 +135,7 @@ const CreateBudget = ({ navigation, route }) => {
                   <TextInput
                     placeholder="Enter Budget Title"
                     style={styles.input}
-                    value={budgetData.title}
+                    value={budgetData.budgetTitle}
                     onChangeText={(text) =>
                       setBudgetData({ ...budgetData, budgetTitle: text })
                     }
@@ -264,8 +274,37 @@ const CreateBudget = ({ navigation, route }) => {
                 </>
               )}
 
+              {step === 2 && selectedHabit === "Saver" && (
+                <>
+                  <Text style={styles.label}>Savings</Text>
+                  <TextInput
+                    placeholder="Amount to save"
+                    keyboardType="numeric"
+                    style={styles.input}
+                    value={budgetData.savings}
+                    onChangeText={(text) =>
+                      setBudgetData({ ...budgetData, savings: text })
+                    }
+                  />
+                  <Image
+                    source={require("../../assets/icons/save.png")}
+                    style={[
+                      {
+                        position: "absolute",
+                        width: "110%",
+                        height: 200,
+                        left: -10,
+                        bottom: -20,
+                        zIndex: -1,
+                        opacity: 0.3,
+                      },
+                    ]}
+                  />
+                </>
+              )}
+
               {/* Step-by-Step Inputs */}
-              {step === 2 && (
+              {step === 2 && selectedHabit !== "Saver" && (
                 <View>
                   <Text style={styles.label}>Food</Text>
                   <TextInput
@@ -294,7 +333,36 @@ const CreateBudget = ({ navigation, route }) => {
                 </View>
               )}
 
-              {step === 3 && (
+              {step === 3 && selectedHabit === "Saver" && (
+                <View>
+                  <Text style={styles.label}>Food</Text>
+                  <TextInput
+                    placeholder="Food Budget"
+                    keyboardType="numeric"
+                    style={styles.input}
+                    value={budgetData.food}
+                    onChangeText={(text) =>
+                      setBudgetData({ ...budgetData, food: text })
+                    }
+                  />
+                  <Image
+                    source={require("../../assets/icons/food.jpg")}
+                    style={[
+                      {
+                        position: "absolute",
+                        width: "110%",
+                        height: 400,
+                        left: -20,
+                        bottom: -260,
+                        zIndex: -1,
+                        opacity: 0.4,
+                      },
+                    ]}
+                  />
+                </View>
+              )}
+
+              {step === 3 && selectedHabit !== "Saver" && (
                 <View>
                   <Text style={styles.label}>Transportation</Text>
                   <TextInput
@@ -323,7 +391,36 @@ const CreateBudget = ({ navigation, route }) => {
                 </View>
               )}
 
-              {step === 4 && (
+              {step === 4 && selectedHabit === "Saver" && (
+                <View>
+                  <Text style={styles.label}>Transportation</Text>
+                  <TextInput
+                    placeholder="Transport Budget"
+                    keyboardType="numeric"
+                    style={styles.input}
+                    value={budgetData.transport}
+                    onChangeText={(text) =>
+                      setBudgetData({ ...budgetData, transport: text })
+                    }
+                  />
+                  <Image
+                    source={require("../../assets/icons/transpo.jpg")}
+                    style={[
+                      {
+                        position: "absolute",
+                        width: "110%",
+                        height: 260,
+                        left: -15,
+                        bottom: -290,
+                        zIndex: -1,
+                        opacity: 0.4,
+                      },
+                    ]}
+                  />
+                </View>
+              )}
+
+              {step === 4 && selectedHabit !== "Saver" && (
                 <View style={{ marginTop: 0 }}>
                   <Text style={styles.label}>Wants & Needs (Optional) </Text>
                   <TextInput
@@ -362,7 +459,46 @@ const CreateBudget = ({ navigation, route }) => {
                 </View>
               )}
 
-              {step === 5 && (
+              {step === 5 && selectedHabit === "Saver" && (
+                <View style={{ marginTop: 0 }}>
+                  <Text style={styles.label}>Wants & Needs (Optional) </Text>
+                  <TextInput
+                    placeholder="Wants & Needs"
+                    keyboardType="numeric"
+                    style={styles.input}
+                    value={budgetData.wants}
+                    onChangeText={(text) =>
+                      setBudgetData({ ...budgetData, wants: text })
+                    }
+                  />
+                  <Text style={styles.label}>Notes (Optional)</Text>
+                  <TextInput
+                    placeholder="Additional Notes"
+                    style={[styles.input, { height: 80 }]}
+                    value={budgetData.note}
+                    onChangeText={(text) =>
+                      setBudgetData({ ...budgetData, note: text })
+                    }
+                    multiline
+                  />
+                  <Image
+                    source={require("../../assets/icons/needs.png")}
+                    style={[
+                      {
+                        position: "absolute",
+                        width: "110%",
+                        height: 390,
+                        left: -20,
+                        bottom: -270,
+                        zIndex: -1,
+                        opacity: 0.3,
+                      },
+                    ]}
+                  />
+                </View>
+              )}
+
+              {step === 5 && selectedHabit !== "Saver" && (
                 <>
                   <Text style={styles.label}>Savings</Text>
                   <TextInput

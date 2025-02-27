@@ -89,7 +89,15 @@ const HomeScreen = ({ navigation }) => {
     const budgetColor = item.budgetType === "Month" ? "#03AED2" : "#F65C78";
     return (
       <View style={styles.cardContainerBudget}>
-        <TouchableOpacity style={[styles.budgetCard]}>
+        <TouchableOpacity
+          style={[styles.budgetCard]}
+          onPress={() =>
+            navigation.navigate("BudgetDetailsScreen", {
+              budget: item,
+              budgetId: item.id, // Ensure budget ID is passed
+            })
+          }
+        >
           <View
             style={[styles.cardContainer, { borderRightColor: budgetColor }]}
           >
@@ -128,18 +136,6 @@ const HomeScreen = ({ navigation }) => {
     setModalVisible(false);
     navigation.navigate("SelectBudgetingHabitScreen", { budgetType: type });
   };
-
-  // const handleLogout = () => {
-  //   auth.signOut().then(() => {
-  //     navigation.dispatch(
-  //       CommonActions.reset({
-  //         index: 0,
-  //         routes: [{ name: "WelcomeScreen" }],
-  //       })
-  //     );
-  //   });
-  // };
-
   const toggleModal = () => {
     setModalVisible(!modalVisible);
   };
