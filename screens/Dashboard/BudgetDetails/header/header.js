@@ -36,7 +36,7 @@ const Header = ({ navigation }) => {
             style={styles.arrowLeftContainer}
           >
             <Feather name="chevron-left" size={30} color="white" />
-            <Text style={styles.titleHeader}>Budget list</Text>
+            <Text style={styles.titleHeader}>All budget</Text>
           </TouchableOpacity>
         </View>
         <View>

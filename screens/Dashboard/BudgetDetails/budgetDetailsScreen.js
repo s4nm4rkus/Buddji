@@ -8,6 +8,7 @@ import {
   SafeAreaView,
   ActivityIndicator,
   Dimensions,
+  ScrollView,
 } from "react-native";
 
 import { PieChart } from "react-native-chart-kit";
@@ -15,10 +16,7 @@ import { Svg, Circle } from "react-native-svg";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Feather } from "@expo/vector-icons";
 import { doc, getDoc } from "firebase/firestore";
-import { db } from "../../../firebaseConfig"; // Adjust path if needed
-import { auth } from "../../../firebaseConfig";
-import { query, where } from "firebase/firestore";
-import { useRoute } from "@react-navigation/native";
+import { db } from "../../../firebaseConfig";
 
 import Header from "./header/header";
 import styles from "./budgetdetails.style";
@@ -35,7 +33,7 @@ const BudgetDetailsScreen = ({ navigation, route }) => {
     if (!budgetId) return;
 
     const fetchBudgetData = async () => {
-      setLoading(true); // ✅ Start loading before fetching data
+      setLoading(true);
 
       try {
         const budgetRef = doc(db, "budgets", budgetId);
@@ -57,12 +55,12 @@ const BudgetDetailsScreen = ({ navigation, route }) => {
             color: "#FF6384",
           },
           {
-            name: "Transport",
+            name: "Transportaion",
             population: Number(fetchedBudget.transport),
             color: "#36A2EB",
           },
           {
-            name: "Wants",
+            name: "Wants and Needs",
             population: Number(fetchedBudget.wants),
             color: "#FFCE56",
           },
@@ -79,7 +77,7 @@ const BudgetDetailsScreen = ({ navigation, route }) => {
       } catch (error) {
         console.error("❌ Error fetching budget data:", error);
       } finally {
-        setLoading(false); // ✅ Stop loading after fetching
+        setLoading(false);
       }
     };
 
@@ -92,7 +90,8 @@ const BudgetDetailsScreen = ({ navigation, route }) => {
         <View style={styles.dashboardContainer}>
           <StatusBar style="auto" />
           <Header navigation={navigation} />
-          <Text style={styles.title}>{budget.budgetTitle}</Text>
+          <Text style={styles.title}>Budget details</Text>
+
           <View style={styles.budgetListContainer}>
             {loading ? (
               <ActivityIndicator size="large" color="#0000ff" />
@@ -101,125 +100,177 @@ const BudgetDetailsScreen = ({ navigation, route }) => {
                 No budget data available.
               </Text>
             ) : (
-              <View style={styles.graphContainer}>
-                <View
-                  style={{
-                    position: "relative",
-                    justifyContent: "center",
-                    alignContent: "center",
-                    backgroundColor: "#fff",
-                    width: 200,
-                    height: 200,
-                    shadowColor: "rgba(0, 0, 0, 0.9)",
-                    borderRadius: 125,
-                    elevation: 5,
-                  }}
-                >
-                  <PieChart
-                    style={styles.pie}
-                    data={budgetData.map((item) => ({
-                      name: item.name,
-                      population: item.population,
-                      color: item.color,
-                    }))}
-                    width={screenWidth - -40}
-                    height={250}
-                    chartConfig={{
-                      backgroundColor: "#fff",
-                      backgroundGradientFrom: "#fff",
-                      backgroundGradientTo: "#fff",
-                      color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-                    }}
-                    accessor="population"
-                    backgroundColor="transparent"
-                    hasLegend={false} // Removed side legends
-                    absolute
-                  />
-
-                  {/* Centered white circle */}
-                  <Svg
-                    width="200"
-                    height="200"
-                    style={{
-                      position: "absolute",
-                      top: "50%",
-                      left: "50%",
-                      transform: [{ translateX: -100 }, { translateY: -100 }],
-                    }}
-                  >
-                    <Circle cx="100" cy="100" r="80" fill="white" />
-                  </Svg>
-
-                  {/* Centered Total Budget Text */}
+              <ScrollView>
+                <View style={styles.graphContainer}>
                   <View
                     style={{
-                      position: "absolute",
-                      top: "50%",
-                      left: "50%",
+                      position: "relative",
                       justifyContent: "center",
                       alignContent: "center",
-                      transform: [{ translateX: -53 }, { translateY: -10 }],
+                      backgroundColor: "#fff",
+                      width: 200,
+                      height: 200,
+                      shadowColor: "rgba(0, 0, 0, 0.9)",
+                      borderRadius: 125,
+                      elevation: 5,
                     }}
                   >
-                    <Text
-                      style={{
-                        fontSize: 20,
-                        fontFamily: "InBold",
+                    <PieChart
+                      style={styles.pie}
+                      data={budgetData.map((item) => ({
+                        name: item.name,
+                        population: item.population,
+                        color: item.color,
+                      }))}
+                      width={screenWidth - -40}
+                      height={250}
+                      chartConfig={{
+                        backgroundColor: "#fff",
+                        backgroundGradientFrom: "#fff",
+                        backgroundGradientTo: "#fff",
+                        color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
                       }}
-                    >
-                      {new Intl.NumberFormat("en-PH", {
-                        style: "currency",
-                        currency: "PHP",
-                      }).format(budget.totalBudget)}
-                    </Text>
-                  </View>
-                </View>
+                      accessor="population"
+                      backgroundColor="transparent"
+                      hasLegend={false}
+                      absolute
+                    />
 
-                {/* Custom Legends BELOW the Pie Chart */}
-                <View style={{ marginTop: 20 }}>
-                  {budgetData.map((item, index) => (
-                    <View
-                      key={index}
+                    <Svg
+                      width="200"
+                      height="200"
                       style={{
-                        flexDirection: "row",
-                        alignItems: "center",
-                        marginBottom: 5,
+                        position: "absolute",
+                        top: "50%",
+                        left: "50%",
+                        transform: [{ translateX: -100 }, { translateY: -100 }],
                       }}
                     >
-                      <View
+                      <Circle cx="100" cy="100" r="80" fill="white" />
+                    </Svg>
+
+                    <View
+                      style={{
+                        position: "absolute",
+                        top: "40%",
+                        left: "48%",
+                        justifyContent: "center",
+                        alignContent: "center",
+                        textAlign: "center",
+                        transform: [{ translateX: -50 }, { translateY: -5 }],
+                      }}
+                    >
+                      <Text style={styles.budgeTitlePie}>
+                        {budget.budgetTitle}
+                      </Text>
+
+                      <Text
                         style={{
-                          width: 15,
-                          height: 15,
-                          backgroundColor: item.color,
-                          marginRight: 10,
-                          borderRadius: 3,
+                          fontSize: 20,
+                          fontFamily: "InBold",
+                          textAlign: "center",
                         }}
-                      />
-                      <Text style={{ fontSize: 14 }}>
-                        {item.name} -{" "}
+                      >
                         {new Intl.NumberFormat("en-PH", {
                           style: "currency",
                           currency: "PHP",
-                        }).format(item.population)}
+                        }).format(budget.totalBudget)}
                       </Text>
                     </View>
-                  ))}
-                </View>
+                  </View>
 
-                {/* Additional Budget Details */}
-                <Text style={styles.detail}>
-                  Budget Type: {budget.budgetType}
-                </Text>
-                <Text style={styles.detail}>
-                  Start Date: {budget.startBudgetDuration}
-                </Text>
-                <Text style={styles.detail}>
-                  End Date: {budget.endBudgetDuration}
-                </Text>
-                <TouchableOpacity style={styles.cancelButton}>
-                  <Text style={styles.buttonText}>Delete budget</Text>
-                </TouchableOpacity>
-              </View>
+                  <View
+                    style={{
+                      marginTop: 20,
+                      width: "100%",
+                      paddingBottom: 5,
+                      marginBottom: 5,
+                      borderBottomWidth: 0.4,
+                    }}
+                  >
+                    <Text
+                      style={[
+                        styles.budgeTitlePie,
+                        {
+                          fontSize: 14,
+                          fontFamily: "InRegular",
+                          textAlign: "center",
+                          marginBottom: 25,
+                        },
+                      ]}
+                    >
+                      {budget.budgetType} | {budget.startBudgetDuration} to {""}
+                      {budget.endBudgetDuration}
+                    </Text>
+                    {budgetData.map((item, index) => (
+                      <View
+                        key={index}
+                        style={{
+                          flexDirection: "row",
+                          alignItems: "center",
+                          marginBottom: 15,
+                          width: "100%",
+                        }}
+                      >
+                        <View
+                          style={{
+                            width: 12,
+                            height: 12,
+                            backgroundColor: item.color,
+                            marginRight: 10,
+                            borderRadius: 100,
+                          }}
+                        />
+                        <View
+                          style={{
+                            width: "100%",
+                            justifyContent: "space-between",
+                            flexDirection: "row",
+                            paddingRight: 25,
+                          }}
+                        >
+                          <Text
+                            style={{ fontSize: 14, fontFamily: "InRegular" }}
+                          >
+                            {item.name}
+                          </Text>
+                          <Text
+                            style={{ fontSize: 14, fontFamily: "InRegular" }}
+                          >
+                            {new Intl.NumberFormat("en-PH", {
+                              style: "currency",
+                              currency: "PHP",
+                            }).format(item.population)}
+                          </Text>
+                        </View>
+                      </View>
+                    ))}
+                  </View>
+
+                  <Text
+                    style={[
+                      styles.detail,
+                      { textAlign: "left", fontFamily: "InSemiBold" },
+                    ]}
+                  >
+                    Notes
+                  </Text>
+                  <View
+                    style={{
+                      width: "100%",
+                      backgroundColor: "#eee",
+                      paddingHorizontal: 10,
+                      paddingVertical: 5,
+                      borderRadius: 4,
+                    }}
+                  >
+                    <Text style={styles.detail}>{budget.note}.</Text>
+                  </View>
+                  <TouchableOpacity style={styles.cancelButton}>
+                    <Text style={styles.buttonText}>Delete budget</Text>
+                  </TouchableOpacity>
+                </View>
+              </ScrollView>
             )}
           </View>
         </View>

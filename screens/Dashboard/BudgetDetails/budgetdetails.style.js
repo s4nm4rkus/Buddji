@@ -4,6 +4,7 @@ const styles = StyleSheet.create({
   dashboardContainer: {
     flex: 1,
     justifyContent: "center",
+    paddingBottom: 10,
   },
 
   graphContainer: {
@@ -12,12 +13,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "white",
     width: "100%",
-    shadowColor: "rgba(0, 0, 0, 0.4)",
+    shadowColor: "rgba(0, 0, 0, 0.5)",
     borderRadius: 8,
+    marginTop: 10,
+    marginBottom: 20,
     paddingHorizontal: 20,
     paddingTop: 20,
     paddingBottom: 10,
-    elevation: 8,
+    elevation: 5,
   },
 
   budgetListContainer: {
@@ -65,15 +68,22 @@ const styles = StyleSheet.create({
   budgetTotalSub: { fontFamily: "InMedium", fontSize: 10, marginTop: -2 },
 
   title: {
-    marginTop: 10,
+    marginTop: 20,
+    paddingBottom: 10,
     marginLeft: 20,
-    marginBottom: -20,
-    fontSize: 20,
-    fontFamily: "InExtraBold",
+    fontSize: 16,
+    fontFamily: "InSemiBold",
+  },
+
+  budgeTitlePie: {
+    fontSize: 12,
+    fontFamily: "InBold",
+    textAlign: "center",
   },
 
   detail: {
-    fontSize: 16,
+    textAlign: "justify",
+    fontSize: 14,
     marginVertical: 5,
   },
 
@@ -88,7 +98,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#FF5555",
     width: "100%",
     borderRadius: 10,
-    marginVertical: 10,
+    marginTop: 30,
+    marginBottom: 10,
     paddingVertical: 10,
     elevation: 2,
   },
