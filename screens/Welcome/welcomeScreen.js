@@ -29,8 +29,8 @@ const WelcomeScreen = ({ navigation }) => {
       <View style={styles.container}>
         <Text style={[styles.welcomeText, { zIndex: 1 }]}>Welcome!</Text>
         <Text style={[styles.welcomeGreet, { zIndex: 1 }]}>
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry.
+          Your money, your rules! Take charge of your budget and achieve your
+          financial goals with ease.
         </Text>
         <StatusBar style="auto" />
         <View style={styles.welcomeButtonContainer}>
