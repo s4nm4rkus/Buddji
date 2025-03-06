@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     paddingHorizontal: 20,
     paddingTop: 20,
-    paddingBottom: 10,
+    paddingBottom: 50,
     elevation: 5,
   },
 
@@ -95,9 +95,12 @@ const styles = StyleSheet.create({
   },
 
   cancelButton: {
+    position: "absolute",
     backgroundColor: "#FF5555",
     width: "100%",
     borderRadius: 10,
+    left: 20,
+    bottom: -10,
     marginTop: 30,
     marginBottom: 10,
     paddingVertical: 10,

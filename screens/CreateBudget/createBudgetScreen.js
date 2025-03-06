@@ -153,7 +153,7 @@ const CreateBudget = ({ navigation, route }) => {
                   <Text style={styles.label}>Budget Duration</Text>
                   <View style={styles.budgetDurationWrapper}>
                     <TextInput
-                      placeholder="month/day/year"
+                      placeholder="mm/dd/yyyy"
                       style={styles.inputDuration}
                       value={budgetData.startBudgetDuration}
                       onChangeText={(text) =>
@@ -178,7 +178,7 @@ const CreateBudget = ({ navigation, route }) => {
                     </Text>
 
                     <TextInput
-                      placeholder="month/day/year"
+                      placeholder="mm/dd/yyyy"
                       style={styles.inputDuration}
                       value={budgetData.endBudgetDuration}
                       onChangeText={(text) =>
@@ -230,16 +230,35 @@ const CreateBudget = ({ navigation, route }) => {
                         <Text
                           style={[styles.labelValue, { textAlign: "center" }]}
                         >
-                          P {budgetData.totalBudget}
+                          {new Intl.NumberFormat("en-PH", {
+                            style: "currency",
+                            currency: "PHP",
+                          }).format(budgetData.totalBudget || 0)}
                         </Text>
-                        <Text style={styles.labelTop}>Total Budget</Text>
+
+                        <Text
+                          style={[styles.labelTop, { textAlign: "center" }]}
+                        >
+                          {" "}
+                          Total Budget
+                        </Text>
                       </View>
                       <View>
                         <Text
-                          style={[styles.labelValue, { textAlign: "center" }]}
+                          style={[
+                            styles.labelValue,
+                            { textAlign: "right", fontSize: 12 },
+                          ]}
                         >
-                          {budgetData.startBudgetDuration} -{" "}
-                          {budgetData.endBudgetDuration}
+                          {budgetData.startBudgetDuration}
+                        </Text>
+                        <Text
+                          style={[
+                            styles.labelValue,
+                            { textAlign: "right", fontSize: 12 },
+                          ]}
+                        >
+                          to {budgetData.endBudgetDuration}
                         </Text>
                         <Text
                           style={[styles.labelTop, { textAlign: "center" }]}
@@ -248,28 +267,6 @@ const CreateBudget = ({ navigation, route }) => {
                         </Text>
                       </View>
                     </View>
-                  </View>
-                  <View>
-                    <Text
-                      style={[
-                        styles.labelValue,
-                        {
-                          fontSize: 20,
-                          textAlign: "center",
-                          color: "#FF5555",
-                        },
-                      ]}
-                    >
-                      P {budgetData.totalBudget}
-                    </Text>
-                    <Text
-                      style={[
-                        styles.labelTop,
-                        { textAlign: "center", marginBottom: 10 },
-                      ]}
-                    >
-                      Remaining
-                    </Text>
                   </View>
                 </>
               )}

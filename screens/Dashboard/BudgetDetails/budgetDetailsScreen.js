@@ -54,22 +54,22 @@ const BudgetDetailsScreen = ({ navigation, route }) => {
           {
             name: "Food",
             population: Number(fetchedBudget.food),
-            color: "#FF6384",
+            color: "#FF304F",
           },
           {
             name: "Transportaion",
             population: Number(fetchedBudget.transport),
-            color: "#36A2EB",
+            color: "#002651",
           },
           {
             name: "Wants and Needs",
             population: Number(fetchedBudget.wants),
-            color: "#FFCE56",
+            color: "#775ADA",
           },
           {
             name: "Savings",
             population: Number(fetchedBudget.savings),
-            color: "#4BC0C0",
+            color: "#28C7FA",
           },
         ].filter((item) => item.population > 0);
 
@@ -297,15 +297,15 @@ const BudgetDetailsScreen = ({ navigation, route }) => {
                   >
                     <Text style={styles.detail}>{budget.note}.</Text>
                   </View>
-                  <TouchableOpacity
-                    style={styles.cancelButton}
-                    onPress={handleDelete}
-                  >
-                    <Text style={styles.buttonText}>Delete budget</Text>
-                  </TouchableOpacity>
                 </View>
               </ScrollView>
             )}
+            <TouchableOpacity
+              style={styles.cancelButton}
+              onPress={handleDelete}
+            >
+              <Text style={styles.buttonText}>Delete budget</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </SafeAreaView>
