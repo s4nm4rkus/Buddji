@@ -23,7 +23,6 @@ const CreateBudget = ({ navigation, route }) => {
   const { budgetType } = route.params;
   const { selectedHabit } = route.params;
   const [userId, setUserId] = useState(null);
-
   const [step, setStep] = useState(1);
   const [budgetData, setBudgetData] = useState({
     userId: "",
@@ -233,7 +232,7 @@ const CreateBudget = ({ navigation, route }) => {
                           {new Intl.NumberFormat("en-PH", {
                             style: "currency",
                             currency: "PHP",
-                          }).format(budgetData.totalBudget || 0)}
+                          }).format(Number(budgetData.totalBudget) || 0)}
                         </Text>
 
                         <Text
@@ -267,6 +266,29 @@ const CreateBudget = ({ navigation, route }) => {
                         </Text>
                       </View>
                     </View>
+                  </View>
+                  <View>
+                    <Text
+                      style={[
+                        styles.labelValue,
+                        { textAlign: "center", fontSize: 18, color: "red" },
+                      ]}
+                    >
+                      {new Intl.NumberFormat("en-PH", {
+                        style: "currency",
+                        currency: "PHP",
+                      }).format(
+                        (Number(budgetData.totalBudget) || 0) -
+                          (Number(budgetData.food) || 0) -
+                          (Number(budgetData.savings) || 0) -
+                          (Number(budgetData.transport) || 0) -
+                          (Number(budgetData.wants) || 0)
+                      )}
+                    </Text>
+
+                    <Text style={[styles.labelTop, { textAlign: "center" }]}>
+                      Remaining
+                    </Text>
                   </View>
                 </>
               )}
